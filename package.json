@@ -17,7 +17,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "serv": "json-server --watch db.json"
+    "serv": "json-server --watch db.json",
+    "api": "npx json-server --watch data/db.json --port 8000"
   },
   "eslintConfig": {
     "extends": [
