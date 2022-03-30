@@ -1,8 +1,10 @@
-export function getList() {
-  return fetch("http://localhost:8000/product").then((data) => data.json());
+export async function getApi() {
+  return await fetch("http://localhost:8000/product").then((data) =>
+    data.json()
+  );
 }
 
-export function setItem(item) {
+export function setApi(item) {
   return fetch("http://localhost:8000/product", {
     method: "POST",
     headers: {
@@ -10,4 +12,24 @@ export function setItem(item) {
     },
     body: JSON.stringify({ item }),
   }).then((data) => data.json());
+}
+
+export function putApi(item) {
+  return fetch("http://localhost:8000/product/1", {
+    method: "PUT",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ item }),
+  })
+    .then((data) => data.json())
+    .then((data) => this.setState({ postId: data.id }));
+}
+
+export function deleteApi(item) {
+  return fetch("http://localhost:8000/product/1", {
+    method: "PUT",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ item }),
+  })
+    .then((data) => data.json())
+    .then((data) => this.setState({ postId: data.id }));
 }

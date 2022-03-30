@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import ButtonBar from "../ButtonBar/ButtonBar";
 import ProductListBox from "../ProductListBox/ProductListBox";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { getList, setItem } from "../../services/list";
+import { getApi, setApi } from "../../services/list";
 
 let Products = () => {
   const [productList, setProductList] = useState([]);
@@ -10,6 +10,10 @@ let Products = () => {
   const [productShow, setProductShow] = useState(false);
   const [newProduct, setNewProduct] = useState({});
   const [itemInput, setItemInput] = useState("");
+
+  const [id, setId] = useState("");
+  const [name, setName] = useState("");
+  const [imgUrl, setImgUrl] = useState("");
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -19,17 +23,17 @@ let Products = () => {
 
   useEffect(() => {
     let mounted = true;
-    getList().then((items) => {
+    getApi().then((items) => {
       if (mounted) {
         setProductList(items);
       }
     });
     return () => (mounted = false);
-  }, [productList]);
+  }, []);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setItem(itemInput);
+    setApi(itemInput);
     handleCloseAddProduct();
   };
 
@@ -44,11 +48,16 @@ let Products = () => {
             handleCloseAddProduct={handleCloseAddProduct}
             handleShowAddProduct={handleShowAddProduct}
             productShow={productShow}
-            postData=""
             setNewProduct={setNewProduct}
             setItemInput={setItemInput}
             itemInput={itemInput}
             handleSubmit={handleSubmit}
+            id={id}
+            name={name}
+            imgUrl={imgUrl}
+            setId={setId}
+            setName={setName}
+            setImgUrl={setImgUrl}
           />
           <ProductListBox
             productList={productList}

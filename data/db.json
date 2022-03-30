@@ -1,19 +1,12 @@
 {
   "product": [
     {
-      "id": 1,
-      "imageUrl": "some url here",
-      "name": "Prodqdsuct name",
-      "count": 4,
-      "size": {
-        "width": 200,
-        "height": 1200
-      },
-      "weight": "200g",
-      "comments": [
-        "CommentModel1",
-        "CommentModel2"
-      ]
+      "imgUrl": "",
+      "name": "",
+      "count": "",
+      "size": "",
+      "weight": "",
+      "id": 1
     },
     {
       "id": 2,
@@ -74,6 +67,30 @@
         "CommentModel",
         "CommentModel"
       ]
+    },
+    {
+      "item": "",
+      "id": 6
+    },
+    {
+      "item": "",
+      "id": 7
+    },
+    {
+      "item": "",
+      "id": 8
+    },
+    {
+      "item": "",
+      "id": 9
+    },
+    {
+      "item": "",
+      "id": 10
+    },
+    {
+      "item": "",
+      "id": 11
     }
   ],
   "comments": {
