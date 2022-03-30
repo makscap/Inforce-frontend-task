@@ -1,6 +1,6 @@
 export async function getApi() {
-  return await fetch("http://localhost:8000/product").then((data) =>
-    data.json()
+  return await fetch("http://localhost:8000/product").then((response) =>
+    response.json()
   );
 }
 

@@ -21,19 +21,29 @@ let Products = () => {
   const handleCloseAddProduct = () => setProductShow(false);
   const handleShowAddProduct = () => setProductShow(true);
 
+  const [refresh, setRefresh] = useState(false);
+
   useEffect(() => {
-    let mounted = true;
-    getApi().then((items) => {
-      if (mounted) {
-        setProductList(items);
-      }
+    getApi().then((data) => {
+      setProductList(data);
     });
-    return () => (mounted = false);
-  }, []);
+    if (!refresh) return;
+    getApi()
+      .then((data) => {
+        console.log(data);
+        setProductList(data);
+        setRefresh(false);
+        console.log(refresh);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, [refresh]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     setApi(itemInput);
+    setRefresh(!refresh);
     handleCloseAddProduct();
   };
 
