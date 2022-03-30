@@ -87,7 +87,7 @@
 
 
 .card-set__item:last-child {
-  margin-bottom: 0px;
+  /* margin-bottom: 0px; */
 }
 
 .card-set__img {
