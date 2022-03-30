@@ -2,12 +2,14 @@ import React, { useEffect, useState } from "react";
 import ButtonBar from "../ButtonBar/ButtonBar";
 import ProductListBox from "../ProductListBox/ProductListBox";
 import "bootstrap/dist/css/bootstrap.min.css";
+import { getList, setItem } from "../../services/list";
 
 let Products = () => {
   const [productList, setProductList] = useState([]);
   const [show, setShow] = useState(false);
   const [productShow, setProductShow] = useState(false);
   const [newProduct, setNewProduct] = useState({});
+  const [itemInput, setItemInput] = useState("");
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -15,29 +17,21 @@ let Products = () => {
   const handleCloseAddProduct = () => setProductShow(false);
   const handleShowAddProduct = () => setProductShow(true);
 
-  // const postData = fetch("http://localhost:8000/product/", {
-  //   method: "POST",
-  //   headers: {
-  //     Accept: "application/json",
-  //     "Content-Type": "application/json",
-  //   },
-  //   body: JSON.stringify({
-  //     id: Date.now(),
-  //     imageUrl: "none",
-  //     size: "none",
-  //     weight: "200g",
-  //     comments: "none",
-  //   }),
-  // });
-
   useEffect(() => {
-    fetch("http://localhost:8000/product/")
-      .then((response) => response.json())
-      .then((data) => {
-        setProductList(data);
-      })
-      .catch((error) => console.error("Error:", error));
-  }, []);
+    let mounted = true;
+    getList().then((items) => {
+      if (mounted) {
+        setProductList(items);
+      }
+    });
+    return () => (mounted = false);
+  }, [productList]);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setItem(itemInput);
+    handleCloseAddProduct();
+  };
 
   return (
     <div>
@@ -52,6 +46,9 @@ let Products = () => {
             productShow={productShow}
             postData=""
             setNewProduct={setNewProduct}
+            setItemInput={setItemInput}
+            itemInput={itemInput}
+            handleSubmit={handleSubmit}
           />
           <ProductListBox
             productList={productList}

@@ -90,6 +90,10 @@
   /* margin-bottom: 0px; */
 }
 
+.card-set__item:nth-child(3n) {
+  margin-right: 0px;
+}
+
 .card-set__img {
   position: relative;
   overflow: hidden;

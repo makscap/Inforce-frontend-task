@@ -24,18 +24,18 @@ const ProductListBox = ({ productList, handleShow, handleClose, show }) => {
             </li>
           </ul>
           <ul className=" list" style={{ paddingTop: "20px" }}>
-            {Object.keys(e.size).map((sizeInd) => (
-              <li key={sizeInd} className="card-set__text">
-                {e.size[sizeInd]}
+            {/* {Object.values(e.size).map((item) => (
+              <li key={item} className="card-set__text">
+                {item}
               </li>
-            ))}
+            ))} */}
           </ul>
           <ul style={{ backgroundColor: "Khaki" }}>
-            {Object.values(e.comments).map((e) => (
+            {/* {e.comments.map((e) => (
               <li className="list">
                 <span style={{ fontWeight: "bold" }}>comments: {e}</span>
               </li>
-            ))}
+            ))} */}
           </ul>
           <Button
             variant="outline-secondary"

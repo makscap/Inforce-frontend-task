@@ -8,6 +8,9 @@ const ButtonBar = ({
   productShow,
   postData,
   setNewProduct,
+  setItemInput,
+  itemInput,
+  handleSubmit,
 }) => {
   return (
     <div>
@@ -20,16 +23,18 @@ const ButtonBar = ({
       </Button>
       <Modal show={productShow} onHide={handleCloseAddProduct}>
         <Modal.Header closeButton>
-          <Modal.Title>dsfgdhgf</Modal.Title>
+          <Modal.Title>ADD new product in the collection</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <form
-            onSubmit={postData}
             style={{
               display: "flex",
               flexDirection: "column",
               alignItems: "center",
             }}
+            onChange={(event) => setItemInput(event.target.value)}
+            value={itemInput}
+            onSubmit={handleSubmit}
           >
             <label style={{ margin: "10px" }}>
               name:
@@ -59,8 +64,16 @@ const ButtonBar = ({
       <Button
         variant="outline-warning"
         style={{ margin: "20px", width: "100px" }}
+        disabled
       >
         Edit
+      </Button>
+      <Button
+        variant="outline-danger"
+        style={{ margin: "20px", width: "100px" }}
+        disabled
+      >
+        Delete
       </Button>
     </div>
   );
