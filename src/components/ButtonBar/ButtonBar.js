@@ -192,14 +192,6 @@ const ButtonBar = ({
           </Button>
         </Modal.Footer>
       </Modal> */}
-
-      <Button
-        variant="outline-danger"
-        style={{ margin: "20px", width: "100px" }}
-        disabled
-      >
-        Delete
-      </Button>
     </div>
   );
 };

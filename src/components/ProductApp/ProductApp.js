@@ -14,14 +14,13 @@ let Products = () => {
   const [id, setId] = useState("");
   const [name, setName] = useState("");
   const [imgUrl, setImgUrl] = useState("");
+  const [refresh, setRefresh] = useState(false);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
   const handleCloseAddProduct = () => setProductShow(false);
   const handleShowAddProduct = () => setProductShow(true);
-
-  const [refresh, setRefresh] = useState(false);
 
   useEffect(() => {
     getApi().then((data) => {
@@ -45,6 +44,18 @@ let Products = () => {
     setApi(itemInput);
     setRefresh(!refresh);
     handleCloseAddProduct();
+  };
+
+  const handleDelete = (e) => {
+    console.log(e.target.id);
+    const saved = e;
+    fetch(`http://localhost:8000/product/${e.target.id}`, {
+      method: "DELETE",
+    })
+      .then((e) => e.json())
+      .then(() => e.filter((e) => e.id === saved.target.id))
+      .then(() => console.log(e));
+    setRefresh(!refresh);
   };
 
   return (
@@ -74,6 +85,7 @@ let Products = () => {
             handleShow={handleShow}
             handleClose={handleClose}
             show={show}
+            handleDelete={handleDelete}
           />
         </div>
       </main>

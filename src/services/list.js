@@ -19,17 +19,14 @@ export function putApi(item) {
     method: "PUT",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ item }),
-  })
-    .then((data) => data.json())
-    .then((data) => this.setState({ postId: data.id }));
+  }).then((data) => data.json());
 }
 
 export function deleteApi(item) {
-  return fetch("http://localhost:8000/product/1", {
-    method: "PUT",
+  const { id } = item;
+  return fetch(`http://localhost:8000/product/${id}`, {
+    method: "DELETE",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ item }),
-  })
-    .then((data) => data.json())
-    .then((data) => this.setState({ postId: data.id }));
+  }).then((data) => data.json());
 }
