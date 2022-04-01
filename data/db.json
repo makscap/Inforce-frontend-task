@@ -17,7 +17,7 @@
     },
     {
       "id": 2,
-      "imageUrl": "some url here1",
+      "imageUrl": "some url here2",
       "name": "Product name",
       "count": 4,
       "size": {
@@ -32,7 +32,7 @@
     },
     {
       "id": 3,
-      "imageUrl": "some url here2",
+      "imageUrl": "some url here3",
       "name": "Product name2 ",
       "count": 4,
       "size": {

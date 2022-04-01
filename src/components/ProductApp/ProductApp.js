@@ -18,7 +18,7 @@ let Products = () => {
   const [size, setSize] = useState({});
   const [weight, setWeight] = useState("");
   const [comments, setComments] = useState([]);
-  const [userId, setUserId] = useState(null);
+  const [productId, setProductId] = useState(null);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -85,14 +85,14 @@ let Products = () => {
     setSize(item.size);
     setWeight(item.weight);
     setComments(item.comments);
-    setUserId(item.userId);
+    setProductId(item.userId);
   };
 
   const updateProduct = () => {
     let item = { name, imageUrl, count, size, weight, comments };
     console.warn("item", item);
 
-    fetch(`http://localhost:8000/product/${userId}`, {
+    fetch(`http://localhost:8000/product/${productId}`, {
       method: "PUT",
       headers: {
         Accept: "application/json",
@@ -102,8 +102,9 @@ let Products = () => {
     }).then((result) => {
       result.json().then((resp) => {
         console.warn(resp);
+        console.warn(productId);
+        setRefresh(!refresh);
         getApi();
-        console.log(userId);
       });
     });
   };
@@ -199,6 +200,7 @@ let Products = () => {
             deleteProduct={deleteProduct}
             handleShowAddProduct={handleShowAddProduct}
             selectProduct={selectProduct}
+            setProductId={setProductId}
           />
         </div>
       </main>

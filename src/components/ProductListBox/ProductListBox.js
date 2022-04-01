@@ -10,6 +10,7 @@ const ProductListBox = ({
   deleteProduct,
   handleShowAddProduct,
   selectProduct,
+  setProductId,
 }) => {
   // const [deleteItem, setDeleteItem] = useState(null);
 
@@ -69,7 +70,14 @@ const ProductListBox = ({
               {e.weight}
             </li>
           </ul>
-          <button onClick={() => selectProduct(e.id)}>SELECT</button>
+          <button
+            onClick={() => {
+              selectProduct(e.id);
+              setProductId(e.id);
+            }}
+          >
+            SELECT
+          </button>
 
           <div>
             {/* <ul className=" list" style={{ paddingTop: "20px" }}>
