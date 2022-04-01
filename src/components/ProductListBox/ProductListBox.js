@@ -7,8 +7,9 @@ const ProductListBox = ({
   handleShow,
   handleClose,
   show,
-  handleDelete,
+  deleteProduct,
   handleShowAddProduct,
+  selectProduct,
 }) => {
   // const [deleteItem, setDeleteItem] = useState(null);
 
@@ -68,6 +69,7 @@ const ProductListBox = ({
               {e.weight}
             </li>
           </ul>
+          <button onClick={() => selectProduct(e.id)}>SELECT</button>
 
           <div>
             {/* <ul className=" list" style={{ paddingTop: "20px" }}>
@@ -140,7 +142,7 @@ const ProductListBox = ({
             <Button
               variant="outline-danger"
               style={{ margin: "20px", width: "100px" }}
-              onClick={handleDelete}
+              onClick={deleteProduct}
               key={e.id}
               id={e.id}
             >

@@ -7,7 +7,7 @@ const ButtonBar = ({
   productShow,
   setItemInput,
   itemInput,
-  handleSubmit,
+  postProduct,
   imgUrl,
   setName,
   setImgUrl,
@@ -64,7 +64,7 @@ const ButtonBar = ({
               marginRight: "60px",
             }}
             value={itemInput}
-            onSubmit={handleSubmit}
+            onSubmit={postProduct}
           >
             <label style={{ margin: "10px 0px" }}>
               imgUrl:

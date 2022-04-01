@@ -2,7 +2,7 @@
   "product": [
     {
       "id": 1,
-      "imageUrl": "some url here",
+      "imageUrl": "some url here1",
       "name": "Product name",
       "count": 4,
       "size": {
@@ -17,8 +17,8 @@
     },
     {
       "id": 2,
-      "imageUrl": "some url here",
-      "name": "Product name2 ",
+      "imageUrl": "some url here1",
+      "name": "Product name",
       "count": 4,
       "size": {
         "width": 200,
@@ -32,37 +32,7 @@
     },
     {
       "id": 3,
-      "imageUrl": "some url here",
-      "name": "Product name2 ",
-      "count": 4,
-      "size": {
-        "width": 200,
-        "height": 200
-      },
-      "weight": "200g",
-      "comments": [
-        "CommentModel",
-        "CommentModel"
-      ]
-    },
-    {
-      "id": 4,
-      "imageUrl": "some url here",
-      "name": "Product name2 ",
-      "count": 4,
-      "size": {
-        "width": 200,
-        "height": 200
-      },
-      "weight": "200g",
-      "comments": [
-        "CommentModel",
-        "CommentModel"
-      ]
-    },
-    {
-      "id": 5,
-      "imageUrl": "some url here",
+      "imageUrl": "some url here2",
       "name": "Product name2 ",
       "count": 4,
       "size": {

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import ButtonBar from "../ButtonBar/ButtonBar";
 import ProductListBox from "../ProductListBox/ProductListBox";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { getApi, setApi } from "../../services/list";
+import { getApi } from "../../services/list";
 
 let Products = () => {
   const [productList, setProductList] = useState([]);
@@ -18,6 +18,7 @@ let Products = () => {
   const [size, setSize] = useState({});
   const [weight, setWeight] = useState("");
   const [comments, setComments] = useState([]);
+  const [userId, setUserId] = useState(null);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -42,7 +43,7 @@ let Products = () => {
       });
   }, [refresh]);
 
-  const handleSubmit = (e) => {
+  const postProduct = (e) => {
     e.preventDefault();
 
     const item = {
@@ -68,24 +69,111 @@ let Products = () => {
     setRefresh(!refresh);
   };
 
-  const handleDelete = (e) => {
-    console.log(e.target.id);
-    const saved = e;
+  const deleteProduct = (e) => {
     fetch(`http://localhost:8000/product/${e.target.id}`, {
       method: "DELETE",
     }).then((e) => e.json());
-    // .then(() => e.filter((e) => e.id === saved.target.id))
-    // .then(() => console.log(e));
     setRefresh(!refresh);
+    getApi();
+  };
+
+  const selectProduct = (id) => {
+    let item = productList[id - 1];
+    setName(item.name);
+    setImageUrl(item.imageUrl);
+    setCount(item.count);
+    setSize(item.size);
+    setWeight(item.weight);
+    setComments(item.comments);
+    setUserId(item.userId);
+  };
+
+  const updateProduct = () => {
+    let item = { name, imageUrl, count, size, weight, comments };
+    console.warn("item", item);
+
+    fetch(`http://localhost:8000/product/${userId}`, {
+      method: "PUT",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(item),
+    }).then((result) => {
+      result.json().then((resp) => {
+        console.warn(resp);
+        getApi();
+        console.log(userId);
+      });
+    });
   };
 
   return (
     <div>
       <main className="container">
         <div>
-          <h1 style={{ marginBottom: "40px", marginTop: "40px" }}>
-            Product list:
-          </h1>
+          <h1 style={{ marginBottom: "40px" }}>Product list:</h1>
+          <div>
+            <div>
+              <h4>Edit part:</h4>
+              <input
+                type="text"
+                value={name}
+                onChange={(e) => {
+                  setName(e.target.value);
+                }}
+                onClick={() => console.log(name)}
+              />
+              <br />
+              <br />
+              <input
+                type="text"
+                value={imageUrl}
+                onChange={(e) => {
+                  setImageUrl(e.target.value);
+                }}
+              />
+              <br />
+              <br />
+              <input
+                type="text"
+                value={count}
+                onChange={(e) => {
+                  setCount(e.target.value);
+                }}
+              />
+              <br />
+              <br />
+              {/* <input
+                type="text"
+                value={size}
+                onChange={(e) => {
+                  setSize(e.target.value);
+                }}
+              />
+              <br />
+              <br /> */}
+              <input
+                type="text"
+                value={weight}
+                onChange={(e) => {
+                  setWeight(e.target.value);
+                }}
+              />
+              <br />
+              <br />
+              {/* <input
+                type="text"
+                value={comments}
+                onChange={(e) => {
+                  setComments(e.target.value);
+                }}
+              />
+              <br />
+              <br /> */}
+              <button onClick={updateProduct}>Update User</button>
+            </div>
+          </div>
           <ButtonBar
             handleCloseAddProduct={handleCloseAddProduct}
             handleShowAddProduct={handleShowAddProduct}
@@ -93,7 +181,7 @@ let Products = () => {
             // setNewProduct={setNewProduct}
             setItemInput={setItemInput}
             itemInput={itemInput}
-            handleSubmit={handleSubmit}
+            postProduct={postProduct}
             name={name}
             imgUrl={imageUrl}
             setName={setName}
@@ -108,8 +196,9 @@ let Products = () => {
             handleShow={handleShow}
             handleClose={handleClose}
             show={show}
-            handleDelete={handleDelete}
+            deleteProduct={deleteProduct}
             handleShowAddProduct={handleShowAddProduct}
+            selectProduct={selectProduct}
           />
         </div>
       </main>
