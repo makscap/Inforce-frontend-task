@@ -1,7 +1,6 @@
-import { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
-import { deleteApi } from "../../services/list";
+import ButtonEdit from "../Buttons/ButtonEdit";
 
 const ProductListBox = ({
   productList,
@@ -9,6 +8,7 @@ const ProductListBox = ({
   handleClose,
   show,
   handleDelete,
+  handleShowAddProduct,
 }) => {
   // const [deleteItem, setDeleteItem] = useState(null);
 
@@ -48,82 +48,109 @@ const ProductListBox = ({
     <ul className="card-set list">
       {productList.map((e) => (
         <li className="card-set__item" key={e.id} id={e.id}>
-          <ul className=" list" style={{ paddingTop: "20px" }}>
+          <ul
+            className=" list"
+            style={{ paddingTop: "20px", marginTop: "0px" }}
+          >
             <li className="card-set__text">
               <span style={{ fontWeight: "bold" }}>imageUrl: </span>
               {e.imageUrl}
             </li>
             <li className="card-set__text">
-              <span style={{ fontWeight: "bold" }}>name:</span> {e.name}
+              <span style={{ fontWeight: "bold" }}>name: </span> {e.name}
             </li>
             <li className="card-set__text">
-              <span style={{ fontWeight: "bold" }}>count:</span>
+              <span style={{ fontWeight: "bold" }}>count: </span>
               {e.count}
             </li>
             <li className="card-set__text">
-              <span style={{ fontWeight: "bold" }}>weight:</span>
+              <span style={{ fontWeight: "bold" }}>weight: </span>
               {e.weight}
             </li>
           </ul>
-          <Button
-            variant="outline-danger"
-            style={{ margin: "10px", width: "100px" }}
-            onClick={handleDelete}
-            key={e.id}
-            id={e.id}
-          >
-            DELETE
-          </Button>
-          <ul className=" list" style={{ paddingTop: "20px" }}>
-            {/* {Object.values(e.size).map((item) => (
-              <li key={item} className="card-set__text">
-                {item}
-              </li>
-            ))} */}
-          </ul>
-          <ul style={{ backgroundColor: "Khaki" }}>
-            {/* {e.comments.map((e) => (
-              <li className="list">
-                <span style={{ fontWeight: "bold" }}>comments: {e}</span>
-              </li>
-            ))} */}
-          </ul>
-          <Button
-            variant="outline-secondary"
-            onClick={handleShow}
-            style={{ margin: "10px" }}
-          >
-            More information ...
-          </Button>
-          <Modal show={show} onHide={handleClose}>
-            <Modal.Header closeButton>
-              <Modal.Title>{e.name}</Modal.Title>
-            </Modal.Header>
-            <Modal.Body>
-              <ul className=" list" style={{ paddingTop: "20px" }}>
-                <li className="card-set__text">
-                  <span style={{ fontWeight: "bold" }}>imageUrl: </span>
-                  {e.imageUrl}
-                </li>
-                <li className="card-set__text">
-                  <span style={{ fontWeight: "bold" }}>name:</span> {e.name}
-                </li>
-                <li className="card-set__text">
-                  <span style={{ fontWeight: "bold" }}>count:</span>
-                  {e.count}
-                </li>
-                <li className="card-set__text">
-                  <span style={{ fontWeight: "bold" }}>weight:</span>
-                  {e.weight}
-                </li>
-              </ul>
-            </Modal.Body>
-            <Modal.Footer>
-              <Button variant="secondary" onClick={handleClose}>
-                Close
-              </Button>
-            </Modal.Footer>
-          </Modal>
+
+          <div>
+            {/* <ul className=" list" style={{ paddingTop: "20px" }}>
+              {e.name
+                ? Object.values(e.size).map((item) => (
+                    <li key={item} className="card-set__text">
+                      <span style={{ fontWeight: "bold" }}>size: </span>
+                      {item}
+                    </li>
+                  ))
+                : ""}
+            </ul> */}
+          </div>
+          {/* <ul style={{ backgroundColor: "Khaki" }}>
+            {e.comments
+              ? e.comments.map((e) => (
+                  <li className="list">
+                    <span style={{ fontWeight: "bold" }}>comments: {e}</span>
+                  </li>
+                ))
+              : ""}
+          </ul> */}
+          <div>
+            <Button
+              variant="outline-secondary"
+              onClick={handleShow}
+              style={{ margin: "10px" }}
+            >
+              More information...
+            </Button>
+            <Modal show={show} onHide={handleClose}>
+              <Modal.Header closeButton>
+                <Modal.Title>{e.name}</Modal.Title>
+              </Modal.Header>
+              <Modal.Body>
+                <ul className=" list" style={{ paddingTop: "20px" }}>
+                  <li className="card-set__text">
+                    <span style={{ fontWeight: "bold" }}>imageUrl: </span>
+                    {e.imageUrl}
+                  </li>
+                  <li className="card-set__text">
+                    <span style={{ fontWeight: "bold" }}>name:</span> {e.name}
+                  </li>
+                  <li className="card-set__text">
+                    <span style={{ fontWeight: "bold" }}>count:</span>
+                    {e.count}
+                  </li>
+                  <li className="card-set__text">
+                    <span style={{ fontWeight: "bold" }}>weight:</span>
+                    {e.weight}
+                  </li>
+                  {/* <li className="card-set__text">
+                  <span style={{ fontWeight: "bold" }}>size:</span>
+                  {e.size}
+                </li>*/}
+                  {/* <li className="card-set__text">
+                  <span style={{ fontWeight: "bold" }}>comments:</span>
+                  {e.comments}
+                </li> */}
+                </ul>
+              </Modal.Body>
+              <Modal.Footer>
+                <Button variant="secondary" onClick={handleClose}>
+                  Close
+                </Button>
+              </Modal.Footer>
+            </Modal>
+          </div>
+          <div style={{ display: "flex", justifyContent: "center" }}>
+            <Button
+              variant="outline-danger"
+              style={{ margin: "20px", width: "100px" }}
+              onClick={handleDelete}
+              key={e.id}
+              id={e.id}
+            >
+              DELETE
+            </Button>
+            <ButtonEdit
+              variant="outline-warning"
+              onClick={handleShowAddProduct}
+            />
+          </div>
         </li>
       ))}
     </ul>

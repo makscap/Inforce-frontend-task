@@ -8,13 +8,16 @@ let Products = () => {
   const [productList, setProductList] = useState([]);
   const [show, setShow] = useState(false);
   const [productShow, setProductShow] = useState(false);
-  const [newProduct, setNewProduct] = useState({});
+  // const [newProduct, setNewProduct] = useState({});
   const [itemInput, setItemInput] = useState("");
-
-  const [id, setId] = useState("");
-  const [name, setName] = useState("");
-  const [imgUrl, setImgUrl] = useState("");
   const [refresh, setRefresh] = useState(false);
+
+  const [name, setName] = useState("");
+  const [imageUrl, setImageUrl] = useState("");
+  const [count, setCount] = useState("");
+  const [size, setSize] = useState({});
+  const [weight, setWeight] = useState("");
+  const [comments, setComments] = useState([]);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -41,9 +44,28 @@ let Products = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setApi(itemInput);
-    setRefresh(!refresh);
+
+    const item = {
+      imageUrl: imageUrl ? imageUrl : "empty",
+      name: name ? name : "empty",
+      count: count ? count : "empty",
+      size: size ? size : "empty",
+      weight: weight ? weight : "empty",
+      comments: comments ? comments : "empty",
+    };
+
+    fetch("http://localhost:8000/product", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(item),
+    }).then((data) => {
+      console.log("new product added");
+      data.json();
+    });
     handleCloseAddProduct();
+    setRefresh(!refresh);
   };
 
   const handleDelete = (e) => {
@@ -51,10 +73,9 @@ let Products = () => {
     const saved = e;
     fetch(`http://localhost:8000/product/${e.target.id}`, {
       method: "DELETE",
-    })
-      .then((e) => e.json())
-      .then(() => e.filter((e) => e.id === saved.target.id))
-      .then(() => console.log(e));
+    }).then((e) => e.json());
+    // .then(() => e.filter((e) => e.id === saved.target.id))
+    // .then(() => console.log(e));
     setRefresh(!refresh);
   };
 
@@ -69,16 +90,18 @@ let Products = () => {
             handleCloseAddProduct={handleCloseAddProduct}
             handleShowAddProduct={handleShowAddProduct}
             productShow={productShow}
-            setNewProduct={setNewProduct}
+            // setNewProduct={setNewProduct}
             setItemInput={setItemInput}
             itemInput={itemInput}
             handleSubmit={handleSubmit}
-            id={id}
             name={name}
-            imgUrl={imgUrl}
-            setId={setId}
+            imgUrl={imageUrl}
             setName={setName}
-            setImgUrl={setImgUrl}
+            setImgUrl={setImageUrl}
+            setCount={setCount}
+            setSize={setSize}
+            setWeight={setWeight}
+            setComments={setComments}
           />
           <ProductListBox
             productList={productList}
@@ -86,6 +109,7 @@ let Products = () => {
             handleClose={handleClose}
             show={show}
             handleDelete={handleDelete}
+            handleShowAddProduct={handleShowAddProduct}
           />
         </div>
       </main>

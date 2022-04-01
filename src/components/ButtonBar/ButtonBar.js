@@ -1,4 +1,3 @@
-import React, { useRef } from "react";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 
@@ -6,22 +5,17 @@ const ButtonBar = ({
   handleCloseAddProduct,
   handleShowAddProduct,
   productShow,
-  setNewProduct,
   setItemInput,
   itemInput,
   handleSubmit,
   imgUrl,
-  setId,
   setName,
   setImgUrl,
+  setCount,
+  setSize,
+  setWeight,
+  setComments,
 }) => {
-  const id = useRef(null);
-  const imgurl = useRef(null);
-  const name = useRef(null);
-  const size = useRef(null);
-  const weight = useRef(null);
-  const count = useRef(null);
-
   // function putApi(item) {
   //   const data = {
   //     imgUrl: imgurl.current.value,
@@ -55,143 +49,84 @@ const ButtonBar = ({
       </Button>
       <Modal show={productShow} onHide={handleCloseAddProduct}>
         <Modal.Header closeButton>
-          <Modal.Title>ADD new product in the collection</Modal.Title>
+          <Modal.Title>
+            <div style={{ display: "flex", justifyContent: "center" }}>
+              ADD new product in the collection
+            </div>
+          </Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <form
             style={{
               display: "flex",
               flexDirection: "column",
-              alignItems: "center",
+              alignItems: "end",
+              marginRight: "60px",
             }}
-            onChange={(event) => setItemInput(event.target.value)}
             value={itemInput}
             onSubmit={handleSubmit}
           >
-            <label id="imgurl" style={{ margin: "10px" }}>
-              ImgUrl:
+            <label style={{ margin: "10px 0px" }}>
+              imgUrl:
               <input
-                ref={imgurl}
-                onChange={(e) => setNewProduct(e.target.value)}
+                id="imgUrl"
+                onChange={(e) => setImgUrl(e.target.value)}
+                style={{ marginLeft: "10px", width: "250px" }}
               ></input>
             </label>
 
-            <label style={{ margin: "10px" }}>
+            <label style={{ margin: "10px 0px" }}>
               name:
               <input
-                ref={name}
-                id="id"
-                onChange={(e) => setNewProduct(e.target.value)}
+                id="name"
+                onChange={(e) => setName(e.target.value)}
+                style={{ marginLeft: "10px", width: "250px" }}
               ></input>
             </label>
 
-            <label style={{ margin: "10px" }}>
+            <label style={{ margin: "10px 0px" }}>
               count:
               <input
-                ref={count}
                 id="count"
-                onChange={(e) => setNewProduct(e.target.value)}
+                onChange={(e) => setCount(e.target.value)}
+                style={{ marginLeft: "10px", width: "250px" }}
               ></input>
             </label>
 
-            <label id="size" style={{ margin: "10px" }}>
+            <label id="size" style={{ margin: "10px 0px" }}>
               size:
               <input
-                ref={size}
-                onChange={(e) => setNewProduct(e.target.value)}
+                onChange={(e) => setSize(e.target.value)}
+                style={{ marginLeft: "10px", width: "250px" }}
               ></input>
             </label>
-            <label id="weight" style={{ margin: "10px" }}>
+            <label id="weight" style={{ margin: "10px 0px" }}>
               weight:
               <input
-                ref={weight}
-                id="name"
-                onChange={(e) => setNewProduct(e.target.value)}
+                id="weight"
+                onChange={(e) => setWeight(e.target.value)}
+                style={{ marginLeft: "10px", width: "250px" }}
               ></input>
             </label>
-            <button type="submit">Submit</button>
+            <label id="comments" style={{ margin: "10px 0px" }}>
+              comments:
+              <input
+                id="comments"
+                onChange={(e) => setComments(e.target.value)}
+                style={{ marginLeft: "10px", width: "250px" }}
+              ></input>
+            </label>
+            <button style={{ display: "flex", justifyContent: "center" }}>
+              Submit
+            </button>
           </form>
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="secondary" onClick={handleCloseAddProduct}>
+          {/* <Button variant="secondary" type="submit" onClick={handleCloseAddProduct}>
             Close
-          </Button>
+          </Button> */}
         </Modal.Footer>
       </Modal>
-
-      <Button
-        variant="outline-warning"
-        style={{ margin: "20px", width: "100px" }}
-        onClick={handleShowAddProduct}
-        disabled
-      >
-        Edit
-      </Button>
-      {/* <Modal show={productShow} onHide={handleCloseAddProduct}>
-        <Modal.Header closeButton>
-          <Modal.Title>ADD new product in the collection</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <form
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-            }}
-            onChange={(event) => setItemInput(event.target.value)}
-            value={itemInput}
-            // onSubmit={handleSubmitPut}
-          >
-            <label id="imgurl" style={{ margin: "10px" }}>
-              ImgUrl:
-              <input
-                ref={imgurl}
-                onChange={(e) => setImgUrl(e.target.value)}
-              ></input>
-            </label>
-
-            <label style={{ margin: "10px" }}>
-              name:
-              <input
-                ref={name}
-                id="id"
-                onChange={(e) => setId(e.target.value)}
-              ></input>
-            </label>
-
-            <label style={{ margin: "10px" }}>
-              count:
-              <input
-                ref={count}
-                id="count"
-                onChange={(e) => setId(e.target.value)}
-              ></input>
-            </label>
-
-            <label id="size" style={{ margin: "10px" }}>
-              size:
-              <input
-                ref={size}
-                onChange={(e) => setName(e.target.value)}
-              ></input>
-            </label>
-            <label id="weight" style={{ margin: "10px" }}>
-              weight:
-              <input
-                ref={weight}
-                id="name"
-                onChange={(e) => setNewProduct(e.target.value)}
-              ></input>
-            </label>
-            <button type="submit">Submit</button>
-          </form>
-        </Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={handleCloseAddProduct}>
-            Close
-          </Button>
-        </Modal.Footer>
-      </Modal> */}
     </div>
   );
 };
