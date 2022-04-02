@@ -31,10 +31,9 @@
       "id": 2
     },
     {
-      "id": 3,
-      "imageUrl": "some url here3",
       "name": "Product name2 ",
-      "count": 4,
+      "imageUrl": "some url here3",
+      "count": "4444",
       "size": {
         "width": 200,
         "height": 200
@@ -43,7 +42,8 @@
       "comments": [
         "CommentModel",
         "CommentModel"
-      ]
+      ],
+      "id": 3
     },
     {
       "name": "ghj",
@@ -53,6 +53,39 @@
       "weight": "cfvghbhj",
       "comments": "fvhgbjk",
       "id": 4
+    },
+    {
+      "imageUrl": "some url here2",
+      "name": "Product name",
+      "count": "43",
+      "size": {
+        "width": 200,
+        "height": 200
+      },
+      "weight": "200g",
+      "comments": [
+        "CommentModel",
+        "CommentModel"
+      ],
+      "id": 5
+    },
+    {
+      "imageUrl": "empty",
+      "name": "empty",
+      "count": "empty",
+      "size": "empty",
+      "weight": "empty",
+      "comments": "empty",
+      "id": 6
+    },
+    {
+      "name": "empty4",
+      "imageUrl": "empty",
+      "count": "empty",
+      "size": "empty",
+      "weight": "empty",
+      "comments": "empty",
+      "id": 7
     }
   ],
   "comments": {

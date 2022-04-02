@@ -3,6 +3,7 @@ import ButtonBar from "../ButtonBar/ButtonBar";
 import ProductListBox from "../ProductListBox/ProductListBox";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { getApi } from "../../services/list";
+import { useRef } from "react";
 
 let Products = () => {
   const [productList, setProductList] = useState([]);
@@ -125,43 +126,50 @@ let Products = () => {
     });
   };
 
+  const titleRef = useRef();
+
+  const handleBackClick = () => {
+    titleRef.current.scrollIntoView({ behavior: "smooth" });
+  };
+
   return (
     <div>
       <main className="container">
-        <div>
+        <div ref={titleRef}>
           <h1 style={{ marginBottom: "40px" }}>Product list:</h1>
           <div>
-            <div>
-              <h4>Edit part:</h4>
-              <input
-                type="text"
-                value={imageUrl}
-                onChange={(e) => {
-                  setImageUrl(e.target.value);
-                }}
-              />
-              <br />
-              <br />
-              <input
-                type="text"
-                value={name}
-                onChange={(e) => {
-                  setName(e.target.value);
-                }}
-                onClick={() => console.log(name)}
-              />
-              <br />
-              <br />
-              <input
-                type="text"
-                value={count}
-                onChange={(e) => {
-                  setCount(e.target.value);
-                }}
-              />
-              <br />
-              <br />
-              {/* <input
+            {productId ? (
+              <div>
+                <h4>Edit part:</h4>
+                <input
+                  type="text"
+                  value={imageUrl}
+                  onChange={(e) => {
+                    setImageUrl(e.target.value);
+                  }}
+                />
+                <br />
+                <br />
+                <input
+                  type="text"
+                  value={name}
+                  onChange={(e) => {
+                    setName(e.target.value);
+                  }}
+                  onClick={() => console.log(name)}
+                />
+                <br />
+                <br />
+                <input
+                  type="text"
+                  value={count}
+                  onChange={(e) => {
+                    setCount(e.target.value);
+                  }}
+                />
+                <br />
+                <br />
+                {/* <input
                 type="text"
                 value={size}
                 onChange={(e) => {
@@ -170,16 +178,16 @@ let Products = () => {
               />
               <br />
               <br /> */}
-              <input
-                type="text"
-                value={weight}
-                onChange={(e) => {
-                  setWeight(e.target.value);
-                }}
-              />
-              <br />
-              <br />
-              {/* <input
+                <input
+                  type="text"
+                  value={weight}
+                  onChange={(e) => {
+                    setWeight(e.target.value);
+                  }}
+                />
+                <br />
+                <br />
+                {/* <input
                 type="text"
                 value={comments}
                 onChange={(e) => {
@@ -188,14 +196,17 @@ let Products = () => {
               />
               <br />
               <br /> */}
-              <button onClick={updateProduct}>Update User</button>
-            </div>
+                <button onClick={updateProduct}>UPDATE</button>
+                <button onClick={() => setProductId("")}>CANCEL</button>
+              </div>
+            ) : (
+              ""
+            )}
           </div>
           <ButtonBar
             handleCloseAddProduct={handleCloseAddProduct}
             handleShowAddProduct={handleShowAddProduct}
             productShow={productShow}
-            // setNewProduct={setNewProduct}
             setItemInput={setItemInput}
             itemInput={itemInput}
             postProduct={postProduct}
@@ -219,6 +230,7 @@ let Products = () => {
             setProductId={setProductId}
             productState={productState}
             setProductState={setProductState}
+            handleBackClick={handleBackClick}
           />
         </div>
       </main>

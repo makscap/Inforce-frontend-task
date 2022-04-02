@@ -14,6 +14,7 @@ const ProductListBox = ({
 
   setProductState,
   productState,
+  handleBackClick,
 }) => {
   // const [deleteItem, setDeleteItem] = useState(null);
 
@@ -131,9 +132,10 @@ const ProductListBox = ({
               onClick={() => {
                 selectProduct(e.id);
                 setProductId(e.id);
+                handleBackClick();
               }}
             >
-              SELECT
+              EDIT
             </Button>
             {/* <ButtonEdit
               variant="outline-warning"
