@@ -1,6 +1,6 @@
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
-import ButtonEdit from "../Buttons/ButtonEdit";
+// import ButtonEdit from "../Buttons/ButtonEdit";
 
 const ProductListBox = ({
   productList,
@@ -73,14 +73,14 @@ const ProductListBox = ({
               {e.weight}
             </li>
           </ul>
-          <button
+          {/* <button
             onClick={() => {
               selectProduct(e.id);
               setProductId(e.id);
             }}
           >
             SELECT
-          </button>
+          </button> */}
 
           <div>
             {/* <ul className=" list" style={{ paddingTop: "20px" }}>
@@ -125,10 +125,20 @@ const ProductListBox = ({
             >
               DELETE
             </Button>
-            <ButtonEdit
+            <Button
+              variant="outline-warning"
+              style={{ margin: "20px", width: "100px" }}
+              onClick={() => {
+                selectProduct(e.id);
+                setProductId(e.id);
+              }}
+            >
+              SELECT
+            </Button>
+            {/* <ButtonEdit
               variant="outline-warning"
               onClick={handleShowAddProduct}
-            />
+            /> */}
           </div>
         </li>
       ))}
