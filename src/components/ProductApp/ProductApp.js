@@ -20,6 +20,8 @@ let Products = () => {
   const [comments, setComments] = useState([]);
   const [productId, setProductId] = useState(null);
 
+  const [productState, setProductState] = useState();
+
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
@@ -66,6 +68,13 @@ let Products = () => {
       data.json();
     });
     handleCloseAddProduct();
+    setName("");
+    setImageUrl("");
+    setCount("");
+    setSize("");
+    setWeight("");
+    setComments("");
+    setProductId("");
     setRefresh(!refresh);
   };
 
@@ -103,6 +112,13 @@ let Products = () => {
       result.json().then((resp) => {
         console.warn(resp);
         console.warn(productId);
+        setName("");
+        setImageUrl("");
+        setCount("");
+        setSize("");
+        setWeight("");
+        setComments("");
+        setProductId("");
         setRefresh(!refresh);
         getApi();
       });
@@ -119,20 +135,20 @@ let Products = () => {
               <h4>Edit part:</h4>
               <input
                 type="text"
-                value={name}
+                value={imageUrl}
                 onChange={(e) => {
-                  setName(e.target.value);
+                  setImageUrl(e.target.value);
                 }}
-                onClick={() => console.log(name)}
               />
               <br />
               <br />
               <input
                 type="text"
-                value={imageUrl}
+                value={name}
                 onChange={(e) => {
-                  setImageUrl(e.target.value);
+                  setName(e.target.value);
                 }}
+                onClick={() => console.log(name)}
               />
               <br />
               <br />
@@ -201,6 +217,8 @@ let Products = () => {
             handleShowAddProduct={handleShowAddProduct}
             selectProduct={selectProduct}
             setProductId={setProductId}
+            productState={productState}
+            setProductState={setProductState}
           />
         </div>
       </main>
