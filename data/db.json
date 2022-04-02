@@ -68,24 +68,6 @@
         "CommentModel"
       ],
       "id": 5
-    },
-    {
-      "imageUrl": "empty",
-      "name": "empty",
-      "count": "empty",
-      "size": "empty",
-      "weight": "empty",
-      "comments": "empty",
-      "id": 6
-    },
-    {
-      "name": "empty4",
-      "imageUrl": "empty",
-      "count": "empty",
-      "size": "empty",
-      "weight": "empty",
-      "comments": "empty",
-      "id": 7
     }
   ],
   "comments": {
