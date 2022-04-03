@@ -1,0 +1,25 @@
+.footer {
+  display: flex;
+  align-items: center;
+  height: 70px;
+  background-color: lightblue;
+}
+
+.logo {
+  width: 40px;
+  height: 40px;
+  margin-right: 20px;
+  margin-left: 20px;
+}
+
+.title {
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.link {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: black;
+}

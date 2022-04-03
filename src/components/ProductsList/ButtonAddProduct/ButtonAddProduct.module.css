@@ -1,0 +1,33 @@
+.editSection {
+  display: flex;
+  flex-direction: column;
+}
+
+.buttonAdd {
+  width: 180px;
+  height: 50px;
+  background-color: rgb(159, 255, 147);
+  border: 1px solid black;
+  box-shadow: rgba(0, 0, 0, 0.02) 0 1px 3px 0;
+  color: #000;
+  cursor: pointer;
+  font-size: 16px;
+  line-height: 1.25;
+  text-decoration: none;
+  transition: all 250ms;
+  margin-right: 20px;
+}
+
+.buttonAdd:hover,
+.buttonAdd:focus {
+  box-shadow: rgba(0, 0, 0, 0.1) 0 4px 12px;
+}
+
+.buttonAdd:hover {
+  transform: translateY(-1px);
+}
+
+.buttonAdd:active {
+  box-shadow: rgba(0, 0, 0, .06) 0 2px 4px;
+  transform: translateY(0);
+}
