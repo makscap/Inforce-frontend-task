@@ -31,3 +31,41 @@
   box-shadow: rgba(0, 0, 0, .06) 0 2px 4px;
   transform: translateY(0);
 }
+
+
+.btnGroup {
+  display: flex;
+  justify-content: space-between;
+}
+
+
+.btnDefault {
+  width: 120px;
+  height: 30px;
+  background-color: transparent;
+  border: 1px solid black;
+  box-shadow: rgba(0, 0, 0, 0.02) 0 1px 3px 0;
+  color: #000;
+  cursor: pointer;
+  font-size: 16px;
+  line-height: 1.25;
+  text-decoration: none;
+  transition: all 250ms;
+  margin-right: 20px;
+  display: flex;
+  align-items: center;
+}
+
+.btnDefault:hover,
+.btnDefault:focus {
+  box-shadow: rgba(0, 0, 0, 0.1) 0 4px 12px;
+}
+
+.btnDefault:hover {
+  transform: translateY(-1px);
+}
+
+.btnDefault:active {
+  box-shadow: rgba(0, 0, 0, .06) 0 2px 4px;
+  transform: translateY(0);
+}

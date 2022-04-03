@@ -2,7 +2,7 @@
   "product": [
     {
       "name": "Product name",
-      "imageUrl": "some url here1",
+      "imageUrl": "https://loremflickr.com/g/320/240/paris",
       "count": "42",
       "size": {
         "width": 200,
@@ -16,23 +16,8 @@
       "id": 1
     },
     {
-      "name": "Product name",
-      "imageUrl": "some url here2",
-      "count": "43",
-      "size": {
-        "width": 200,
-        "height": 200
-      },
-      "weight": "200g",
-      "comments": [
-        "CommentModel",
-        "CommentModel"
-      ],
-      "id": 2
-    },
-    {
       "name": "Product name2 ",
-      "imageUrl": "some url here3",
+      "imageUrl": "https://loremflickr.com/g/320/240/paris",
       "count": "4444",
       "size": {
         "width": 200,
@@ -47,7 +32,7 @@
     },
     {
       "name": "ghj",
-      "imageUrl": "Maksym",
+      "imageUrl": "https://loremflickr.com/g/320/240/paris",
       "count": "vgbh",
       "size": "cfvgbhj",
       "weight": "cfvghbhj",
@@ -55,7 +40,7 @@
       "id": 4
     },
     {
-      "imageUrl": "some url here2",
+      "imageUrl": "https://loremflickr.com/g/320/240/paris",
       "name": "Product name",
       "count": "43",
       "size": {
@@ -68,6 +53,60 @@
         "CommentModel"
       ],
       "id": 5
+    },
+    {
+      "imageUrl": "https://loremflickr.com/g/320/240/paris",
+      "name": "empty",
+      "count": "empty",
+      "size": "empty",
+      "weight": "empty",
+      "comments": "empty",
+      "id": 6
+    },
+    {
+      "imageUrl": "empty",
+      "name": "empty",
+      "count": "empty",
+      "size": "empty",
+      "weight": "empty",
+      "comments": "empty",
+      "id": 7
+    },
+    {
+      "imageUrl": "empty",
+      "name": "empty",
+      "count": "empty",
+      "size": "empty",
+      "weight": "empty",
+      "comments": "empty",
+      "id": 8
+    },
+    {
+      "imageUrl": "empty",
+      "name": "empty",
+      "count": "empty",
+      "size": "empty",
+      "weight": "empty",
+      "comments": "empty",
+      "id": 9
+    },
+    {
+      "imageUrl": "empty",
+      "name": "empty",
+      "count": "empty",
+      "size": "empty",
+      "weight": "empty",
+      "comments": "empty",
+      "id": 10
+    },
+    {
+      "imageUrl": "empty",
+      "name": "empty",
+      "count": "empty",
+      "size": "empty",
+      "weight": "empty",
+      "comments": "empty",
+      "id": 11
     }
   ],
   "comments": {

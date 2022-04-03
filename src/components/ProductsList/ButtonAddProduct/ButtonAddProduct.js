@@ -16,32 +16,45 @@ const ButtonAddProduct = () => {
 
   const postProduct = (e) => {
     e.preventDefault();
+    const attention = window.confirm(
+      "Are you sure you want to add this product into the database?"
+    );
 
-    const item = {
-      imageUrl: newProduct.imageUrl ? newProduct.imageUrl : "empty",
-      name: newProduct.name ? newProduct.name : "empty",
-      count: newProduct.count ? newProduct.count : "empty",
-      size: newProduct.size ? newProduct.size : "empty",
-      weight: newProduct.weight ? newProduct.weight : "empty",
-      comments: newProduct.comments ? newProduct.comments : "empty",
-    };
+    if (attention) {
+      const item = {
+        imageUrl: newProduct.imageUrl ? newProduct.imageUrl : "empty",
+        name: newProduct.name ? newProduct.name : "empty",
+        count: newProduct.count ? newProduct.count : "empty",
+        size: newProduct.size ? newProduct.size : "empty",
+        weight: newProduct.weight ? newProduct.weight : "empty",
+        comments: newProduct.comments ? newProduct.comments : "empty",
+      };
 
-    fetch("http://localhost:8000/product", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(item),
-    }).then((data) => {
-      console.log("new product added");
-      data.json();
-    });
+      fetch("http://localhost:8000/product", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(item),
+      }).then((data) => {
+        console.log("new product added");
+        data.json();
+      });
+      // Save it!
+      console.log("Product was added to the database.");
+    } else {
+      // Do nothing!
+      console.log("Product was not added to the database.");
+    }
 
     dispatch(changeIsOpenModalAddProduct(false));
     dispatch(getIsRefresh(true));
   };
 
-  const handleClose = () => dispatch(changeIsOpenModalAddProduct(false));
+  const handleClose = (e) => {
+    e.preventDefault();
+    dispatch(changeIsOpenModalAddProduct(false));
+  };
 
   return (
     <div>
@@ -162,12 +175,22 @@ const ButtonAddProduct = () => {
                 style={{ marginLeft: "10px", width: "250px" }}
               ></input>
             </label>
-            <button
-              style={{ display: "flex", justifyContent: "center" }}
-              onClick={postProduct}
-            >
-              Submit
-            </button>
+            <div className={s.btnGroup}>
+              <button
+                style={{ display: "flex", justifyContent: "center" }}
+                onClick={postProduct}
+                className={s.btnDefault}
+              >
+                CONFIRM
+              </button>
+              <button
+                style={{ display: "flex", justifyContent: "center" }}
+                onClick={handleClose}
+                className={s.btnDefault}
+              >
+                CANCEL
+              </button>
+            </div>
           </form>
         </Modal.Body>
         <Modal.Footer></Modal.Footer>
