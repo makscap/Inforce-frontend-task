@@ -16,44 +16,55 @@ const ButtonAddProduct = () => {
 
   const postProduct = (e) => {
     e.preventDefault();
-    const attention = window.confirm(
-      "Are you sure you want to add this product into the database?"
-    );
 
-    if (attention) {
-      const item = {
-        imageUrl: newProduct.imageUrl ? newProduct.imageUrl : "empty",
-        name: newProduct.name ? newProduct.name : "empty",
-        count: newProduct.count ? newProduct.count : "empty",
-        size: newProduct.size ? newProduct.size : "empty",
-        weight: newProduct.weight ? newProduct.weight : "empty",
-        comments: newProduct.comments ? newProduct.comments : "empty",
-      };
+    // const item = {
+    //   imageUrl: newProduct.imageUrl ? newProduct.imageUrl : "empty",
+    //   name: newProduct.name ? newProduct.name : "empty",
+    //   count: newProduct.count ? newProduct.count : "empty",
+    //   size: newProduct.size ? newProduct.size : "empty",
+    //   weight: newProduct.weight ? newProduct.weight : "empty",
+    //   comments: newProduct.comments ? newProduct.comments : "empty",
+    // };
 
-      fetch("http://localhost:8000/product", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(item),
-      }).then((data) => {
-        console.log("new product added");
-        data.json();
-      });
-      // Save it!
-      console.log("Product was added to the database.");
-    } else {
-      // Do nothing!
-      console.log("Product was not added to the database.");
-    }
+    const item = {
+      imageUrl: newProduct.imageUrl,
+      name: newProduct.name,
+      count: newProduct.count,
+      size: newProduct.size,
+      weight: newProduct.weight,
+      comments: newProduct.comments,
+    };
+
+    fetch("http://localhost:8000/product", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(item),
+    }).then((data) => {
+      console.log("new product added");
+      data.json();
+    });
 
     dispatch(changeIsOpenModalAddProduct(false));
     dispatch(getIsRefresh(true));
   };
 
   const handleClose = (e) => {
-    e.preventDefault();
     dispatch(changeIsOpenModalAddProduct(false));
+  };
+
+  const cancelAddTheProduct = (e) => {
+    const attention = window.confirm(
+      "Are you sure you don't want to add this product into the database?"
+    );
+    if (attention) {
+      handleClose();
+      console.log("Product was not added to the database.");
+    } else {
+      console.log("Product was canceled.");
+    }
+    e.preventDefault();
   };
 
   return (
@@ -86,7 +97,9 @@ const ButtonAddProduct = () => {
             <label style={{ margin: "10px 0px" }}>
               imgUrl:
               <input
+                type="text"
                 id="imgUrl"
+                required
                 onChange={(e) => {
                   dispatch(
                     changeNewProduct({
@@ -102,6 +115,7 @@ const ButtonAddProduct = () => {
             <label style={{ margin: "10px 0px" }}>
               name:
               <input
+                type="text"
                 id="name"
                 onChange={(e) => {
                   dispatch(
@@ -112,12 +126,14 @@ const ButtonAddProduct = () => {
                   );
                 }}
                 style={{ marginLeft: "10px", width: "250px" }}
+                required
               ></input>
             </label>
 
             <label style={{ margin: "10px 0px" }}>
               count:
               <input
+                type="text"
                 id="count"
                 onChange={(e) => {
                   dispatch(
@@ -128,12 +144,14 @@ const ButtonAddProduct = () => {
                   );
                 }}
                 style={{ marginLeft: "10px", width: "250px" }}
+                required
               ></input>
             </label>
 
             <label id="size" style={{ margin: "10px 0px" }}>
               size:
               <input
+                type="text"
                 onChange={(e) => {
                   dispatch(
                     changeNewProduct({
@@ -143,11 +161,13 @@ const ButtonAddProduct = () => {
                   );
                 }}
                 style={{ marginLeft: "10px", width: "250px" }}
+                required
               ></input>
             </label>
             <label id="weight" style={{ margin: "10px 0px" }}>
               weight:
               <input
+                type="text"
                 id="weight"
                 onChange={(e) => {
                   dispatch(
@@ -158,11 +178,13 @@ const ButtonAddProduct = () => {
                   );
                 }}
                 style={{ marginLeft: "10px", width: "250px" }}
+                required
               ></input>
             </label>
             <label id="comments" style={{ margin: "10px 0px" }}>
               comments:
               <input
+                type="text"
                 id="comments"
                 onChange={(e) => {
                   dispatch(
@@ -173,10 +195,12 @@ const ButtonAddProduct = () => {
                   );
                 }}
                 style={{ marginLeft: "10px", width: "250px" }}
+                required
               ></input>
             </label>
             <div className={s.btnGroup}>
               <button
+                type="button"
                 style={{ display: "flex", justifyContent: "center" }}
                 onClick={postProduct}
                 className={s.btnDefault}
@@ -184,8 +208,9 @@ const ButtonAddProduct = () => {
                 CONFIRM
               </button>
               <button
+                type="button"
                 style={{ display: "flex", justifyContent: "center" }}
-                onClick={handleClose}
+                onClick={cancelAddTheProduct}
                 className={s.btnDefault}
               >
                 CANCEL
