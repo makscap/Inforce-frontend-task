@@ -141,6 +141,7 @@ const ButtonAddProduct = () => {
                       name: e.target.value,
                     })
                   );
+                  setFieldForm(false);
                 }}
               />
             </div>
