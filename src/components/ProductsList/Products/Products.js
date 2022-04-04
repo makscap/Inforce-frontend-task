@@ -167,6 +167,18 @@ export function Products() {
                 </p>
               </li>
               <li className="card-set__text">
+                <p className={s.list}></p>
+                <p className={s.list}>
+                  width:{productSelectedInformation?.size?.width}
+                </p>
+              </li>
+              <li className="card-set__text">
+                <p className={s.list}></p>
+                <p className={s.list}>
+                  height:{productSelectedInformation?.size?.height}
+                </p>
+              </li>
+              <li className="card-set__text">
                 <p className={s.list}>
                   weight:{productSelectedInformation?.weight}
                 </p>

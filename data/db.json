@@ -2,13 +2,13 @@
   "product": [
     {
       "name": "Product name",
-      "imageUrl": "https://loremflickr.com/g/320/240/paris",
-      "count": "42",
+      "imageUrl": "https://eduk8.esn.org/sites/default/files/imce/develop%20yourself.png",
+      "count": 4011,
       "size": {
         "width": 200,
         "height": 200
       },
-      "weight": "200g",
+      "weight": 14044,
       "comments": [
         "CommentModel",
         "CommentModel"
@@ -16,14 +16,14 @@
       "id": 1
     },
     {
-      "name": "Product name2 ",
-      "imageUrl": "https://loremflickr.com/g/320/240/paris",
-      "count": "4444",
+      "name": "Product name 2 ",
+      "imageUrl": "https://eduk8.esn.org/sites/default/files/imce/develop%20yourself.png",
+      "count": 444,
       "size": {
         "width": 200,
         "height": 200
       },
-      "weight": "200g",
+      "weight": 50,
       "comments": [
         "CommentModel",
         "CommentModel"
@@ -31,10 +31,13 @@
       "id": 3
     },
     {
-      "name": "ghj",
-      "imageUrl": "https://loremflickr.com/g/320/240/paris",
-      "count": "vgbh",
-      "size": "cfvgbhj",
+      "name": "Product name 3",
+      "imageUrl": "https://eduk8.esn.org/sites/default/files/imce/develop%20yourself.png",
+      "count": 2,
+      "size": {
+        "width": 200,
+        "height": 200
+      },
       "weight": "cfvghbhj",
       "comments": [
         "empty"
@@ -42,14 +45,14 @@
       "id": 4
     },
     {
-      "imageUrl": "https://loremflickr.com/g/320/240/paris",
-      "name": "Product name",
-      "count": "43",
+      "imageUrl": "https://eduk8.esn.org/sites/default/files/imce/develop%20yourself.png",
+      "name": "Product name 4",
+      "count": 43,
       "size": {
         "width": 200,
         "height": 200
       },
-      "weight": "200g",
+      "weight": 200,
       "comments": [
         "CommentModel",
         "CommentModel"
@@ -57,48 +60,29 @@
       "id": 5
     },
     {
-      "imageUrl": "https://loremflickr.com/g/320/240/paris",
-      "name": "empty",
-      "count": "empty",
-      "size": "empty",
-      "weight": "empty",
+      "imageUrl": "https://eduk8.esn.org/sites/default/files/imce/develop%20yourself.png",
+      "name": "Product name 5",
+      "count": 10,
+      "size": {
+        "width": 200,
+        "height": 200
+      },
+      "weight": 500,
       "comments": [
         "empty"
       ],
       "id": 6
     },
     {
-      "imageUrl": "https://motorbikewriter.com/wp-content/uploads/2021/09/2022-royal-enfield-classic-350-first-look-retro-motorcycle-india-7-1155x770.jpg",
-      "name": "x",
-      "count": "1",
-      "size": "ds",
-      "weight": "dfs",
+      "imageUrl": "https://eduk8.esn.org/sites/default/files/imce/develop%20yourself.png",
+      "name": "Product name 6",
+      "count": "33",
+      "size": "200",
+      "weight": "150",
       "comments": [
-        "empty"
+        "150"
       ],
-      "id": 26
-    },
-    {
-      "imageUrl": "wwwwww",
-      "name": "wwwwww",
-      "count": "wwwwww",
-      "size": "wwwwww",
-      "weight": "wwwwww",
-      "comments": [
-        "wwwwww"
-      ],
-      "id": 27
-    },
-    {
-      "imageUrl": "aaa",
-      "name": "a",
-      "count": "a",
-      "size": "aa",
-      "weight": "a",
-      "comments": [
-        null
-      ],
-      "id": 28
+      "id": 7
     }
   ],
   "comments": {

@@ -13,6 +13,8 @@ import React, { useState } from "react";
 
 const ButtonAddProduct = () => {
   const [fieldForm, setFieldForm] = useState(false);
+  const [width, setWidth] = useState("");
+  const [height, setHeight] = useState("");
 
   const dispatch = useDispatch();
   let IsOpenModalAddProduct = useSelector(selectIsOpenModalAddProduct);
@@ -33,20 +35,21 @@ const ButtonAddProduct = () => {
     const item = {
       imageUrl: newProduct.imageUrl,
       name: newProduct.name,
-      count: newProduct.count,
+      count: Number(newProduct.count),
       size: newProduct.size,
       weight: newProduct.weight,
       comments: [newProduct.comments],
+      size: { width: Number(width), height: Number(height) },
     };
-    console.warn(item.imageUrl?.trim());
+
     if (
       item.imageUrl?.trim() &&
       item.name?.trim() &&
-      item.count?.trim() &&
-      item.size?.trim() &&
-      item.weight?.trim()
-      // &&
-      // String(item.comments)?.trim()
+      String(item.count)?.trim() &&
+      String(item.size.width)?.trim() &&
+      String(item.size.height)?.trim() &&
+      item.weight?.trim() &&
+      String(item.comments)?.trim()
     ) {
       fetch("http://localhost:8000/product", {
         method: "POST",
@@ -117,6 +120,7 @@ const ButtonAddProduct = () => {
               </label>
               <input
                 // required
+                type="name"
                 onChange={(e) => {
                   dispatch(
                     changeNewProduct({
@@ -134,6 +138,7 @@ const ButtonAddProduct = () => {
                 name:
               </label>
               <input
+                type="name"
                 required
                 onChange={(e) => {
                   dispatch(
@@ -152,7 +157,7 @@ const ButtonAddProduct = () => {
                 count:
               </label>
               <input
-                type="count"
+                type="number"
                 required
                 onChange={(e) => {
                   dispatch(
@@ -166,22 +171,43 @@ const ButtonAddProduct = () => {
             </div>
 
             <div className={s.labelInput}>
-              <label htmlFor="size" className={s.label}>
-                size:
+              <label htmlFor="width" className={s.label}>
+                width:
               </label>
               <input
-                type="size"
+                type="number"
                 required
                 onChange={(e) => {
-                  dispatch(
-                    changeNewProduct({
-                      ...newProduct,
-                      size: e.target.value,
-                    })
-                  );
+                  // dispatch(
+                  //   changeNewProduct({
+                  //     ...newProduct,
+                  //     width: e.target.value,
+                  //   })
+                  // );
+                  setWidth(e.target.value);
                 }}
               />
             </div>
+
+            <div className={s.labelInput}>
+              <label htmlFor="height" className={s.label}>
+                height:
+              </label>
+              <input
+                type="number"
+                required
+                onChange={(e) => {
+                  // dispatch(
+                  //   changeNewProduct({
+                  //     ...newProduct,
+                  //     height: e.target.value,
+                  //   })
+                  // );
+                  setHeight(e.target.value);
+                }}
+              />
+            </div>
+
             <div className={s.labelInput}>
               <label htmlFor="weight" className={s.label}>
                 weight:
