@@ -35,7 +35,6 @@ export function Products() {
     if (!isRefresh) return;
     getApi()
       .then((data) => {
-        console.log(data);
         dispatch(getProducts(data));
         dispatch(getIsRefresh(false));
       })
@@ -85,19 +84,16 @@ export function Products() {
                   width="320px"
                   height="240px"
                 ></img>
-                {/* <span style={{ fontWeight: "bold" }}>imageUrl: </span> */}
-                {/* {e.imageUrl} */}
               </li>
               <li className="card-set__text">
-                {/* <span style={{ fontWeight: "bold" }}>name: </span> */}
                 <h3>{e.name}</h3>
               </li>
               <li className="card-set__text">
-                <span style={{ fontWeight: "bold" }}>count: </span>
+                <span style={{ fontWeight: "bold" }}>Quantity: </span>
                 {e.count}
               </li>
               <li className="card-set__text">
-                <span style={{ fontWeight: "bold" }}>weight: </span>
+                <span style={{ fontWeight: "bold" }}>Weight: </span>
                 {e.weight}
               </li>
             </ul>
@@ -112,17 +108,6 @@ export function Products() {
                   ))
                 : ""}
             </ul> */}
-            </div>
-            <div>
-              {/* <ul style={{ backgroundColor: "Khaki" }}>
-            {e.comments
-              ? e.comments.map((e) => (
-                  <li className="list">
-                    <span style={{ fontWeight: "bold" }}>comments: {e}</span>
-                  </li>
-                ))
-              : ""}
-          </ul> */}
             </div>
             <div className={s.buttonGroup}>
               <button
@@ -158,26 +143,48 @@ export function Products() {
         ))}
         <Modal show={showModal} onHide={handleClose}>
           <Modal.Header closeButton>
-            <Modal.Title>{productSelectedInformation?.name}</Modal.Title>
+            <Modal.Title>
+              <span>Product card</span>
+            </Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            <ul className=" list" style={{ paddingTop: "20px" }}>
+            <ul className={s.card}>
               <li className="card-set__text">
-                <span style={{ fontWeight: "bold" }}>imageUrl: </span>
-                {productSelectedInformation?.imageUrl}
+                <img
+                  src={productSelectedInformation?.imageUrl}
+                  alt="Paris"
+                  width="465px"
+                ></img>
               </li>
               <li className="card-set__text">
-                <span style={{ fontWeight: "bold" }}>name:</span>
-                {productSelectedInformation?.name}
+                <h3 className={s.list}>
+                  Name: {productSelectedInformation?.name}
+                </h3>
               </li>
               <li className="card-set__text">
-                <span style={{ fontWeight: "bold" }}>count:</span>
-                {productSelectedInformation?.count}
+                <p className={s.list}>
+                  count: {productSelectedInformation?.count}
+                </p>
               </li>
               <li className="card-set__text">
-                <span style={{ fontWeight: "bold" }}>weight:</span>
-                {productSelectedInformation?.weight}
+                <p className={s.list}>
+                  weight:{productSelectedInformation?.weight}
+                </p>
               </li>
+              {productSelectedInformation && (
+                <li className={s.comments_item}>
+                  <p className={s.list}>Comments: </p>
+
+                  <ul className={s.comments_list}>
+                    {productSelectedInformation &&
+                      productSelectedInformation.comments.map((e, i) => (
+                        <li className={s.comments_item} key={i}>
+                          <p className={s.list}>{e}</p>
+                        </li>
+                      ))}
+                  </ul>
+                </li>
+              )}
             </ul>
           </Modal.Body>
           <Modal.Footer>

@@ -36,7 +36,7 @@ const ButtonAddProduct = () => {
       count: newProduct.count,
       size: newProduct.size,
       weight: newProduct.weight,
-      comments: newProduct.comments,
+      comments: [newProduct.comments],
     };
     console.warn(item.imageUrl?.trim());
     if (
@@ -44,8 +44,9 @@ const ButtonAddProduct = () => {
       item.name?.trim() &&
       item.count?.trim() &&
       item.size?.trim() &&
-      item.weight?.trim() &&
-      item.comments?.trim()
+      item.weight?.trim()
+      // &&
+      // String(item.comments)?.trim()
     ) {
       fetch("http://localhost:8000/product", {
         method: "POST",

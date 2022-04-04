@@ -112,3 +112,37 @@
   justify-content: center;
   margin-bottom: 20px;
 }
+
+
+
+.comments_list {
+  padding: 0px;
+  min-height: 80px;
+  max-height: 150px;
+  background-color: rgb(238, 238, 238);
+  border: 1px solid gray;
+  margin-top: 20px;
+}
+
+.comments_item {
+  list-style: none;
+  padding: 0px;
+  margin: 0px;
+}
+
+.list {
+  padding-left: 10px;
+  margin: 0px;
+  
+}
+
+.comments {
+  padding: 0px;
+margin-bottom: 20px;  
+}
+
+.card{
+    list-style: none;
+  padding: 0px;
+  margin: 0px;
+}
