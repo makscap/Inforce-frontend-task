@@ -8,8 +8,12 @@ import {
 import { getIsRefresh } from "../Products/Products-slice";
 import Modal from "react-bootstrap/Modal";
 import s from "./ButtonAddProduct.module.css";
+import { useForm } from "react-hook-form";
+import React, { useState } from "react";
 
 const ButtonAddProduct = () => {
+  const [fieldForm, setFieldForm] = useState(false);
+
   const dispatch = useDispatch();
   let IsOpenModalAddProduct = useSelector(selectIsOpenModalAddProduct);
   let newProduct = useSelector(selectNewProduct);
@@ -34,20 +38,34 @@ const ButtonAddProduct = () => {
       weight: newProduct.weight,
       comments: newProduct.comments,
     };
+    console.warn(item.imageUrl?.trim());
+    if (
+      item.imageUrl?.trim() &&
+      item.name?.trim() &&
+      item.count?.trim() &&
+      item.size?.trim() &&
+      item.weight?.trim() &&
+      item.comments?.trim()
+    ) {
+      fetch("http://localhost:8000/product", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(item),
+      }).then((data) => {
+        console.log("new product added");
+        data.json();
+      });
+      dispatch(changeNewProduct((newProduct = "")));
+      dispatch(changeIsOpenModalAddProduct(false));
+      dispatch(getIsRefresh(true));
+      setFieldForm(false);
 
-    fetch("http://localhost:8000/product", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(item),
-    }).then((data) => {
-      console.log("new product added");
-      data.json();
-    });
-
-    dispatch(changeIsOpenModalAddProduct(false));
-    dispatch(getIsRefresh(true));
+      return;
+    }
+    setFieldForm(true);
+    console.log("You must fill all fields!");
   };
 
   const handleClose = (e) => {
@@ -65,6 +83,7 @@ const ButtonAddProduct = () => {
       console.log("Product was canceled.");
     }
     e.preventDefault();
+    setFieldForm(false);
   };
 
   return (
@@ -80,13 +99,146 @@ const ButtonAddProduct = () => {
       <Modal show={IsOpenModalAddProduct} onHide={handleClose}>
         <Modal.Header closeButton>
           <Modal.Title>
-            <div style={{ display: "flex", justifyContent: "center" }}>
-              ADD new product in the collection
-            </div>
+            <div className={s.title}>ADD new product in the collection</div>
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <form
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+            }}
+          >
+            <div className={s.labelInput}>
+              <label htmlFor="imageUrl" className={s.label}>
+                imageUrl:
+              </label>
+              <input
+                // required
+                onChange={(e) => {
+                  dispatch(
+                    changeNewProduct({
+                      ...newProduct,
+                      imageUrl: e.target.value,
+                    })
+                  );
+                }}
+                minLength="1"
+              />
+            </div>
+
+            <div className={s.labelInput}>
+              <label htmlFor="name" className={s.label}>
+                name:
+              </label>
+              <input
+                required
+                onChange={(e) => {
+                  dispatch(
+                    changeNewProduct({
+                      ...newProduct,
+                      name: e.target.value,
+                    })
+                  );
+                }}
+              />
+            </div>
+
+            <div className={s.labelInput}>
+              <label htmlFor="count" className={s.label}>
+                count:
+              </label>
+              <input
+                type="count"
+                required
+                onChange={(e) => {
+                  dispatch(
+                    changeNewProduct({
+                      ...newProduct,
+                      count: e.target.value,
+                    })
+                  );
+                }}
+              />
+            </div>
+
+            <div className={s.labelInput}>
+              <label htmlFor="size" className={s.label}>
+                size:
+              </label>
+              <input
+                type="size"
+                required
+                onChange={(e) => {
+                  dispatch(
+                    changeNewProduct({
+                      ...newProduct,
+                      size: e.target.value,
+                    })
+                  );
+                }}
+              />
+            </div>
+            <div className={s.labelInput}>
+              <label htmlFor="weight" className={s.label}>
+                weight:
+              </label>
+              <input
+                type="weight"
+                required
+                onChange={(e) => {
+                  dispatch(
+                    changeNewProduct({
+                      ...newProduct,
+                      weight: e.target.value,
+                    })
+                  );
+                }}
+              />
+            </div>
+            <div className={s.labelInput}>
+              <label htmlFor="comments" className={s.label}>
+                comments:
+              </label>
+              <input
+                type="comments"
+                required
+                onChange={(e) => {
+                  dispatch(
+                    changeNewProduct({
+                      ...newProduct,
+                      comments: e.target.value,
+                    })
+                  );
+                }}
+              />
+            </div>
+            {fieldForm ? (
+              <span className={s.warning_message}>
+                This fields cannot be empty
+              </span>
+            ) : (
+              ""
+            )}
+            <div className={s.btnGroup}>
+              <input
+                type="submit"
+                value="CONFIRM"
+                style={{ display: "flex", justifyContent: "center" }}
+                onClick={postProduct}
+                className={s.btnDefault}
+              />
+              <input
+                type="submit"
+                value="CANCEL"
+                style={{ display: "flex", justifyContent: "center" }}
+                onClick={cancelAddTheProduct}
+                className={s.btnDefault}
+              />
+            </div>
+          </form>
+          {/* <form
             style={{
               display: "flex",
               flexDirection: "column",
@@ -216,7 +368,7 @@ const ButtonAddProduct = () => {
                 CANCEL
               </button>
             </div>
-          </form>
+          </form> */}
         </Modal.Body>
         <Modal.Footer></Modal.Footer>
       </Modal>
