@@ -9,6 +9,8 @@ import { getIsRefresh } from "../Products/Products-slice";
 import Modal from "react-bootstrap/Modal";
 import s from "./ButtonAddProduct.module.css";
 import React, { useState } from "react";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const ButtonAddProduct = () => {
   const [fieldForm, setFieldForm] = useState(false);
@@ -60,6 +62,11 @@ const ButtonAddProduct = () => {
         console.log("new product added");
         data.json();
       });
+
+      toast.success(
+        "The product was added! You can find it at the bottom page."
+      );
+
       dispatch(changeNewProduct((newProduct = "")));
       dispatch(changeIsOpenModalAddProduct(false));
       dispatch(getIsRefresh(true));
@@ -91,10 +98,13 @@ const ButtonAddProduct = () => {
 
   return (
     <div>
+      <ToastContainer />
       <button
         type="button"
         className={s.buttonAdd}
-        onClick={() => dispatch(changeIsOpenModalAddProduct(true))}
+        onClick={() => {
+          dispatch(changeIsOpenModalAddProduct(true));
+        }}
       >
         ADD PRODUCT
       </button>

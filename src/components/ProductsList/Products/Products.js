@@ -15,6 +15,8 @@ import Modal from "react-bootstrap/Modal";
 import s from "./Products.module.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { AiOutlineDelete, AiOutlineEdit } from "react-icons/ai";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export function Products() {
   const [showModal, setShowModal] = useState(false);
@@ -87,6 +89,7 @@ export function Products() {
 
   return (
     <div className="container">
+      <ToastContainer />
       <h1 className={s.title}>PRODUCT LIST:</h1>
       <SortLine />
 
@@ -145,6 +148,7 @@ export function Products() {
                 className={s.buttonEdit}
                 onClick={() => {
                   dispatch(getProductSelected(e));
+                  toast.info("The edit page is open! Please, scroll up!");
                 }}
               >
                 <AiOutlineEdit />
@@ -187,17 +191,13 @@ export function Products() {
                 </p>
               </li>
               <li className="card-set__text">
-                <p className={s.list}></p>
                 <p className={s.list}>
-                  width:{productSelectedInformation?.size?.width}
+                  size: {productSelectedInformation?.size?.width}
+                  <span> x </span>
+                  {productSelectedInformation?.size?.height}
                 </p>
               </li>
-              <li className="card-set__text">
-                <p className={s.list}></p>
-                <p className={s.list}>
-                  height:{productSelectedInformation?.size?.height}
-                </p>
-              </li>
+
               <li className="card-set__text">
                 <p className={s.list}>
                   weight:{productSelectedInformation?.weight}
