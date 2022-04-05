@@ -5,30 +5,17 @@ import {
   selectProductSelected,
 } from "../Products/Products-slice";
 import s from "./EditPage.module.css";
-// import { useState } from "react";
+import { useState } from "react";
 
 export function EditPage() {
-  // const [width, setWidth] = useState("");
-  // const [height, setHeight] = useState("");
+  const [width, setWidth] = useState("");
+  const [height, setHeight] = useState("");
 
   const dispatch = useDispatch();
   let productSelected = useSelector(selectProductSelected);
-  console.log("EditPage ~ productSelected", productSelected);
   const productId = productSelected.id;
 
-  // const size = {
-  //   width: width,
-  //   height: height,
-  // };
-
   const updateProduct = (e) => {
-    dispatch(
-      getProductSelected({
-        ...productSelected,
-        // size,
-      })
-    );
-
     e.preventDefault();
 
     fetch(
@@ -43,9 +30,6 @@ export function EditPage() {
       }
     ).then((result) => {
       result.json().then((resp) => {
-        console.warn(resp);
-        console.warn(productId);
-        console.warn(productSelected);
         dispatch(getIsRefresh(true));
         dispatch(getProductSelected(""));
       });
@@ -108,15 +92,20 @@ export function EditPage() {
             ></input>
           </label>
 
-          {/* <label className={s.label}>
+          <label className={s.label}>
             <span className={s.titleInput}>width:</span>
             <input
               type="number"
-              value={productSelected?.size?.width}
+              value={productSelected?.size[0]}
               className={s.input}
               onChange={(e) => {
-                handleTargetValue(e.target.value);
-                console.log(e.target.value);
+                setWidth(Number(e.target.value));
+                dispatch(
+                  getProductSelected({
+                    ...productSelected,
+                    size: { width, height },
+                  })
+                );
               }}
             ></input>
           </label>
@@ -125,10 +114,19 @@ export function EditPage() {
             <span className={s.titleInput}>height:</span>
             <input
               type="number"
+              value={productSelected?.size[1]}
               className={s.input}
-              onChange={(e) => e.target.value}
+              onChange={(e) => {
+                setHeight(Number(e.target.value));
+                dispatch(
+                  getProductSelected({
+                    ...productSelected,
+                    size: { width, height },
+                  })
+                );
+              }}
             ></input>
-          </label> */}
+          </label>
 
           <label className={s.label}>
             <span className={s.titleInput}>weight:</span>

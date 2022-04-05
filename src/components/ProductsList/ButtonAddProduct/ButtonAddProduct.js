@@ -11,11 +11,12 @@ import s from "./ButtonAddProduct.module.css";
 import React, { useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { getApi } from "../../services/api";
 
 const ButtonAddProduct = () => {
   const [fieldForm, setFieldForm] = useState(false);
-  // const [width, setWidth] = useState("");
-  // const [height, setHeight] = useState("");
+  const [width, setWidth] = useState("");
+  const [height, setHeight] = useState("");
 
   const dispatch = useDispatch();
   let IsOpenModalAddProduct = useSelector(selectIsOpenModalAddProduct);
@@ -24,32 +25,22 @@ const ButtonAddProduct = () => {
   const postProduct = (e) => {
     e.preventDefault();
 
-    // const item = {
-    //   imageUrl: newProduct.imageUrl ? newProduct.imageUrl : "empty",
-    //   name: newProduct.name ? newProduct.name : "empty",
-    //   count: newProduct.count ? newProduct.count : "empty",
-    //   size: newProduct.size ? newProduct.size : "empty",
-    //   weight: newProduct.weight ? newProduct.weight : "empty",
-    //   comments: newProduct.comments ? newProduct.comments : "empty",
-    // };
-
     const item = {
       imageUrl: newProduct.imageUrl,
       name: newProduct.name,
       count: Number(newProduct.count),
-      size: newProduct.size,
       weight: newProduct.weight,
       comments: [newProduct.comments],
-      // size: { width: Number(width), height: Number(height) },
+      size: { width: width, height: height },
     };
 
     if (
       item.imageUrl?.trim() &&
       item.name?.trim() &&
       String(item.count)?.trim() &&
-      // String(item.size.width)?.trim() &&
-      // String(item.size.height)?.trim() &&
-      item.weight?.trim() &&
+      String(item.size.width)?.trim() &&
+      String(item.size.height)?.trim() &&
+      String(item.weight)?.trim() &&
       String(item.comments)?.trim()
     ) {
       fetch("https://product-shop-api.herokuapp.com/product", {
@@ -60,6 +51,7 @@ const ButtonAddProduct = () => {
         body: JSON.stringify(item),
       }).then((data) => {
         console.log("new product added");
+        console.warn(item);
         data.json();
       });
 
@@ -74,6 +66,7 @@ const ButtonAddProduct = () => {
 
       return;
     }
+    getApi();
     setFieldForm(true);
     console.log("You must fill all fields!");
   };
@@ -186,7 +179,7 @@ const ButtonAddProduct = () => {
                 type="number"
                 required
                 onChange={(e) => {
-                  // setWidth(e.target.value);
+                  setWidth(Number(e.target.value));
                 }}
               />
             </div>
@@ -199,7 +192,7 @@ const ButtonAddProduct = () => {
                 type="number"
                 required
                 onChange={(e) => {
-                  // setHeight(e.target.value);
+                  setHeight(Number(e.target.value));
                 }}
               />
             </div>
@@ -209,13 +202,13 @@ const ButtonAddProduct = () => {
                 weight:
               </label>
               <input
-                type="weight"
+                type="number"
                 required
                 onChange={(e) => {
                   dispatch(
                     changeNewProduct({
                       ...newProduct,
-                      weight: e.target.value,
+                      weight: Number(e.target.value),
                     })
                   );
                 }}

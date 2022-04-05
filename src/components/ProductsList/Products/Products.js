@@ -78,8 +78,6 @@ export function Products() {
       console.log("new product added");
       data.json();
     });
-    // dispatch(changeNewProduct((newProduct = "")));
-    // dispatch(changeIsOpenModalAddProduct(false));
     dispatch(getIsRefresh(true));
     setComment("");
     setShowModal(false);
@@ -120,18 +118,7 @@ export function Products() {
                 {e.weight}
               </li>
             </ul>
-            <div>
-              {/* <ul className=" list" style={{ paddingTop: "20px" }}>
-              {e.name
-                ? Object.values(e.size).map((item) => (
-                    <li key={item} className="card-set__text">
-                      <span style={{ fontWeight: "bold" }}>size: </span>
-                      {item}
-                    </li>
-                  ))
-                : ""}
-            </ul> */}
-            </div>
+            <div></div>
             <div className={s.buttonGroup}>
               <button
                 type="button"
@@ -193,7 +180,10 @@ export function Products() {
               <li className="card-set__text">
                 <p className={s.list}>
                   size: {productSelectedInformation?.size?.width}
-                  <span> x </span>
+                  {productSelectedInformation?.size?.width &&
+                    productSelectedInformation?.size?.height && (
+                      <span> x </span>
+                    )}
                   {productSelectedInformation?.size?.height}
                 </p>
               </li>

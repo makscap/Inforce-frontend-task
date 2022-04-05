@@ -5,7 +5,6 @@ import { getProducts, selectProducts } from "../Products/Products-slice";
 export function SortLine() {
   const dispatch = useDispatch();
   const allProducts = useSelector(selectProducts);
-  console.log("SortLine ~ allProducts first", allProducts);
 
   const sortArray = (type) => {
     const types = {
