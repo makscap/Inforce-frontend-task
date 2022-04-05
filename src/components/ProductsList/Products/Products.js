@@ -81,7 +81,7 @@ export function Products() {
               <li className="card-set__text">
                 <img
                   src={e.imageUrl}
-                  alt="Paris"
+                  alt={e.name}
                   width="320px"
                   height="240px"
                 ></img>
@@ -153,7 +153,7 @@ export function Products() {
               <li className="card-set__text">
                 <img
                   src={productSelectedInformation?.imageUrl}
-                  alt="Paris"
+                  alt={productSelectedInformation?.name}
                   width="465px"
                   className={s.image}
                 ></img>
