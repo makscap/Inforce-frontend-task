@@ -2,7 +2,7 @@
   "product": [
     {
       "name": "Product name",
-      "imageUrl": "https://eduk8.esn.org/sites/default/files/imce/develop%20yourself.png",
+      "imageUrl": "https://avatars.mds.yandex.net/get-mpic/4529531/img_id8845833908614038895.jpeg/orig",
       "count": 4011,
       "size": {
         "width": 200,
@@ -17,7 +17,7 @@
     },
     {
       "name": "Product name 2 ",
-      "imageUrl": "https://eduk8.esn.org/sites/default/files/imce/develop%20yourself.png",
+      "imageUrl": "https://avatars.mds.yandex.net/get-mpic/4529531/img_id8845833908614038895.jpeg/orig",
       "count": 444,
       "size": {
         "width": 200,
@@ -32,7 +32,7 @@
     },
     {
       "name": "Product name 3",
-      "imageUrl": "https://eduk8.esn.org/sites/default/files/imce/develop%20yourself.png",
+      "imageUrl": "https://avatars.mds.yandex.net/get-mpic/4529531/img_id8845833908614038895.jpeg/orig",
       "count": 2,
       "size": {
         "width": 200,
@@ -45,7 +45,7 @@
       "id": 4
     },
     {
-      "imageUrl": "https://eduk8.esn.org/sites/default/files/imce/develop%20yourself.png",
+      "imageUrl": "https://avatars.mds.yandex.net/get-mpic/4529531/img_id8845833908614038895.jpeg/orig",
       "name": "Product name 4",
       "count": 43,
       "size": {
@@ -60,7 +60,7 @@
       "id": 5
     },
     {
-      "imageUrl": "https://eduk8.esn.org/sites/default/files/imce/develop%20yourself.png",
+      "imageUrl": "https://avatars.mds.yandex.net/get-mpic/4529531/img_id8845833908614038895.jpeg/orig",
       "name": "Product name 5",
       "count": 10,
       "size": {
@@ -74,7 +74,7 @@
       "id": 6
     },
     {
-      "imageUrl": "https://eduk8.esn.org/sites/default/files/imce/develop%20yourself.png",
+      "imageUrl": "https://avatars.mds.yandex.net/get-mpic/4529531/img_id8845833908614038895.jpeg/orig",
       "name": "Product name 6",
       "count": "33",
       "size": "200",

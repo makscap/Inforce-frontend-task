@@ -155,6 +155,7 @@ export function Products() {
                   src={productSelectedInformation?.imageUrl}
                   alt="Paris"
                   width="465px"
+                  className={s.image}
                 ></img>
               </li>
               <li className="card-set__text">

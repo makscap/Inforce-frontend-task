@@ -146,3 +146,7 @@ margin-bottom: 20px;
   padding: 0px;
   margin: 0px;
 }
+
+.image {
+max-width: calc(100% - 10px);
+}
