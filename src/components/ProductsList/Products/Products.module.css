@@ -119,12 +119,20 @@
   padding: 0px;
   min-height: 80px;
   max-height: 150px;
-  background-color: rgb(238, 238, 238);
   border: 1px solid gray;
   margin-top: 20px;
+  overflow: auto;
+
 }
 
 .comments_item {
+  list-style: none;
+  padding: 0px;
+  margin: 0px;
+  margin-bottom: 10px;
+}
+
+.comments_item:last-child {
   list-style: none;
   padding: 0px;
   margin: 0px;
@@ -138,15 +146,111 @@
 
 .comments {
   padding: 0px;
-margin-bottom: 20px;  
+  margin-bottom: 20px;  
 }
 
 .card{
-    list-style: none;
+  list-style: none;
   padding: 0px;
   margin: 0px;
-}
+  background-color: rgb(248, 248, 248);}
 
 .image {
 max-width: calc(100% - 10px);
+}
+
+
+
+.feedback {
+  width: 100%;
+  height: 50px; 
+  background-color: rgb(175, 255, 195);
+  border: 0px;
+  box-shadow: rgba(0, 0, 0, 0.02) 0 1px 3px 0;
+  color: #000;
+  cursor: pointer;
+  font-size: 16px;
+  line-height: 1.25;
+  text-decoration: none;
+  transition: all 250ms;
+  margin-right: 10px;
+  margin-bottom: 20px;
+
+}
+
+.feedback:hover,
+.feedback:focus {
+  box-shadow: rgba(0, 0, 0, 0.1) 0 4px 12px;
+  font-weight: 700;
+
+}
+
+.feedback:hover {
+  transform: translateY(-1px);
+}
+
+.feedback:active {
+  box-shadow: rgba(0, 0, 0, .06) 0 2px 4px;
+  transform: translateY(0);
+}
+
+
+.crash {
+   width: 100%;
+  height: 50px; 
+  background-color: rgb(218, 218, 218);
+  border: 0px;
+  box-shadow: rgba(0, 0, 0, 0.02) 0 1px 3px 0;
+  color: rgb(73, 73, 73);
+  cursor: pointer;
+  font-size: 16px;
+  line-height: 1.25;
+  text-decoration: none;
+  transition: all 250ms;
+  margin-right: 10px;
+  margin-bottom: 20px;
+
+}
+
+
+.close {
+   width: 100%;
+  height: 50px; 
+  background-color: rgb(255, 175, 175);
+  border: 0px;
+  box-shadow: rgba(0, 0, 0, 0.02) 0 1px 3px 0;
+  color: #000;
+  cursor: pointer;
+  font-size: 16px;
+  line-height: 1.25;
+  text-decoration: none;
+  transition: all 250ms;
+  margin-right: 10px;
+  margin-bottom: 10px;
+}
+
+.close:hover,
+.close:focus {
+  box-shadow: rgba(0, 0, 0, 0.1) 0 4px 12px;
+  font-weight: 700;
+}
+
+.close:hover {
+  transform: translateY(-1px);
+}
+
+.close:active {
+  box-shadow: rgba(0, 0, 0, .06) 0 2px 4px;
+  transform: translateY(0);
+}
+
+.formComment {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.formItems {
+  margin-bottom: 10px;
+
 }

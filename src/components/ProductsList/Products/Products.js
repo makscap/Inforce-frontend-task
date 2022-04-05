@@ -11,7 +11,6 @@ import {
   getIsRefresh,
 } from "./Products-slice";
 import { SortLine } from "../SortLine/SortLine";
-import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import s from "./Products.module.css";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -19,6 +18,7 @@ import { AiOutlineDelete, AiOutlineEdit } from "react-icons/ai";
 
 export function Products() {
   const [showModal, setShowModal] = useState(false);
+  const [comment, setComment] = useState(null);
 
   const dispatch = useDispatch();
   const productSelectedInformation = useSelector(
@@ -47,23 +47,41 @@ export function Products() {
   const handleShow = () => setShowModal(true);
 
   const deleteProduct = (e) => {
-    // const attention = window.confirm(
-    //   "Are you sure you want to delete this product from the database?"
-    // );
-
-    // if (attention) {
     fetch(`https://product-shop-api.herokuapp.com/product/${e.target.id}`, {
       method: "DELETE",
     }).then((e) => e.json());
-    // Save it!
-    //   console.log("Product was deleted from the database.");
-    // } else {
-    //   // Do nothing!
-    //   console.log("Product was not deleted from the database.");
-    // }
 
     getApi();
     dispatch(getIsRefresh(true));
+  };
+
+  const postComment = (e) => {
+    e.preventDefault();
+
+    const item = {
+      ...productSelectedInformation,
+      comments: [...productSelectedInformation.comments, comment],
+    };
+
+    fetch(
+      `https://product-shop-api.herokuapp.com/product/${productSelectedInformation.id}`,
+      {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(item),
+      }
+    ).then((data) => {
+      console.log("new product added");
+      data.json();
+    });
+    // dispatch(changeNewProduct((newProduct = "")));
+    // dispatch(changeIsOpenModalAddProduct(false));
+    dispatch(getIsRefresh(true));
+    setShowModal(false);
+
+    return;
   };
 
   return (
@@ -149,15 +167,14 @@ export function Products() {
             </Modal.Title>
           </Modal.Header>
           <Modal.Body>
+            <img
+              src={productSelectedInformation?.imageUrl}
+              alt={productSelectedInformation?.name}
+              width="465px"
+              className={s.image}
+            ></img>
             <ul className={s.card}>
-              <li className="card-set__text">
-                <img
-                  src={productSelectedInformation?.imageUrl}
-                  alt={productSelectedInformation?.name}
-                  width="465px"
-                  className={s.image}
-                ></img>
-              </li>
+              <li className="card-set__text"></li>
               <li className="card-set__text">
                 <h3 className={s.list}>
                   Name: {productSelectedInformation?.name}
@@ -193,7 +210,12 @@ export function Products() {
                     {productSelectedInformation &&
                       productSelectedInformation.comments.map((e, i) => (
                         <li className={s.comments_item} key={i}>
+                          {/* <textarea> */}
+                          <p className={s.list}>
+                            <span>ID: {i}</span>
+                          </p>
                           <p className={s.list}>{e}</p>
+                          {/* </textarea> */}
                         </li>
                       ))}
                   </ul>
@@ -202,9 +224,31 @@ export function Products() {
             </ul>
           </Modal.Body>
           <Modal.Footer>
-            <Button variant="secondary" onClick={handleClose}>
-              Close
-            </Button>
+            <form className={s.formComment}>
+              <input
+                type="text"
+                onChange={(e) => {
+                  setComment(e.target.value);
+                }}
+                className={s.formItems}
+              ></input>
+              <button
+                className={comment ? s.feedback : s.crash}
+                disabled={!comment}
+                onClick={(e) => postComment(e)}
+              >
+                LEAVE FEEDBACK
+              </button>
+              <button
+                className={s.close}
+                onClick={(e) => {
+                  e.preventDefault();
+                  handleClose(e);
+                }}
+              >
+                CLOSE
+              </button>
+            </form>
           </Modal.Footer>
         </Modal>
       </ul>

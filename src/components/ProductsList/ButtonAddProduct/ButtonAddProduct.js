@@ -8,13 +8,12 @@ import {
 import { getIsRefresh } from "../Products/Products-slice";
 import Modal from "react-bootstrap/Modal";
 import s from "./ButtonAddProduct.module.css";
-import { useForm } from "react-hook-form";
 import React, { useState } from "react";
 
 const ButtonAddProduct = () => {
   const [fieldForm, setFieldForm] = useState(false);
-  const [width, setWidth] = useState("");
-  const [height, setHeight] = useState("");
+  // const [width, setWidth] = useState("");
+  // const [height, setHeight] = useState("");
 
   const dispatch = useDispatch();
   let IsOpenModalAddProduct = useSelector(selectIsOpenModalAddProduct);
@@ -39,15 +38,15 @@ const ButtonAddProduct = () => {
       size: newProduct.size,
       weight: newProduct.weight,
       comments: [newProduct.comments],
-      size: { width: Number(width), height: Number(height) },
+      // size: { width: Number(width), height: Number(height) },
     };
 
     if (
       item.imageUrl?.trim() &&
       item.name?.trim() &&
       String(item.count)?.trim() &&
-      String(item.size.width)?.trim() &&
-      String(item.size.height)?.trim() &&
+      // String(item.size.width)?.trim() &&
+      // String(item.size.height)?.trim() &&
       item.weight?.trim() &&
       String(item.comments)?.trim()
     ) {
@@ -119,7 +118,6 @@ const ButtonAddProduct = () => {
                 imageUrl:
               </label>
               <input
-                // required
                 type="name"
                 onChange={(e) => {
                   dispatch(
@@ -178,13 +176,7 @@ const ButtonAddProduct = () => {
                 type="number"
                 required
                 onChange={(e) => {
-                  // dispatch(
-                  //   changeNewProduct({
-                  //     ...newProduct,
-                  //     width: e.target.value,
-                  //   })
-                  // );
-                  setWidth(e.target.value);
+                  // setWidth(e.target.value);
                 }}
               />
             </div>
@@ -197,13 +189,7 @@ const ButtonAddProduct = () => {
                 type="number"
                 required
                 onChange={(e) => {
-                  // dispatch(
-                  //   changeNewProduct({
-                  //     ...newProduct,
-                  //     height: e.target.value,
-                  //   })
-                  // );
-                  setHeight(e.target.value);
+                  // setHeight(e.target.value);
                 }}
               />
             </div>
@@ -266,137 +252,6 @@ const ButtonAddProduct = () => {
               />
             </div>
           </form>
-          {/* <form
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "end",
-              marginRight: "60px",
-            }}
-          >
-            <label style={{ margin: "10px 0px" }}>
-              imgUrl:
-              <input
-                type="text"
-                id="imgUrl"
-                required
-                onChange={(e) => {
-                  dispatch(
-                    changeNewProduct({
-                      ...newProduct,
-                      imageUrl: e.target.value,
-                    })
-                  );
-                }}
-                style={{ marginLeft: "10px", width: "250px" }}
-              ></input>
-            </label>
-
-            <label style={{ margin: "10px 0px" }}>
-              name:
-              <input
-                type="text"
-                id="name"
-                onChange={(e) => {
-                  dispatch(
-                    changeNewProduct({
-                      ...newProduct,
-                      name: e.target.value,
-                    })
-                  );
-                }}
-                style={{ marginLeft: "10px", width: "250px" }}
-                required
-              ></input>
-            </label>
-
-            <label style={{ margin: "10px 0px" }}>
-              count:
-              <input
-                type="text"
-                id="count"
-                onChange={(e) => {
-                  dispatch(
-                    changeNewProduct({
-                      ...newProduct,
-                      count: e.target.value,
-                    })
-                  );
-                }}
-                style={{ marginLeft: "10px", width: "250px" }}
-                required
-              ></input>
-            </label>
-
-            <label id="size" style={{ margin: "10px 0px" }}>
-              size:
-              <input
-                type="text"
-                onChange={(e) => {
-                  dispatch(
-                    changeNewProduct({
-                      ...newProduct,
-                      size: e.target.value,
-                    })
-                  );
-                }}
-                style={{ marginLeft: "10px", width: "250px" }}
-                required
-              ></input>
-            </label>
-            <label id="weight" style={{ margin: "10px 0px" }}>
-              weight:
-              <input
-                type="text"
-                id="weight"
-                onChange={(e) => {
-                  dispatch(
-                    changeNewProduct({
-                      ...newProduct,
-                      weight: e.target.value,
-                    })
-                  );
-                }}
-                style={{ marginLeft: "10px", width: "250px" }}
-                required
-              ></input>
-            </label>
-            <label id="comments" style={{ margin: "10px 0px" }}>
-              comments:
-              <input
-                type="text"
-                id="comments"
-                onChange={(e) => {
-                  dispatch(
-                    changeNewProduct({
-                      ...newProduct,
-                      comments: e.target.value,
-                    })
-                  );
-                }}
-                style={{ marginLeft: "10px", width: "250px" }}
-                required
-              ></input>
-            </label>
-            <div className={s.btnGroup}>
-              <button
-                type="button"
-                style={{ display: "flex", justifyContent: "center" }}
-                onClick={postProduct}
-                className={s.btnDefault}
-              >
-                CONFIRM
-              </button>
-              <button
-                type="button"
-                style={{ display: "flex", justifyContent: "center" }}
-                onClick={cancelAddTheProduct}
-                className={s.btnDefault}
-              >
-                CANCEL
-              </button>
-            </div>
-          </form> */}
         </Modal.Body>
         <Modal.Footer></Modal.Footer>
       </Modal>
