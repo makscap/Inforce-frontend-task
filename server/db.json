@@ -1,0 +1,94 @@
+{
+  "product": [
+    {
+      "name": "Product name",
+      "imageUrl": "https://eduk8.esn.org/sites/default/files/imce/develop%20yourself.png",
+      "count": 4011,
+      "size": {
+        "width": 200,
+        "height": 200
+      },
+      "weight": 14044,
+      "comments": [
+        "CommentModel",
+        "CommentModel"
+      ],
+      "id": 1
+    },
+    {
+      "name": "Product name 2 ",
+      "imageUrl": "https://eduk8.esn.org/sites/default/files/imce/develop%20yourself.png",
+      "count": 444,
+      "size": {
+        "width": 200,
+        "height": 200
+      },
+      "weight": 50,
+      "comments": [
+        "CommentModel",
+        "CommentModel"
+      ],
+      "id": 3
+    },
+    {
+      "name": "Product name 3",
+      "imageUrl": "https://eduk8.esn.org/sites/default/files/imce/develop%20yourself.png",
+      "count": 2,
+      "size": {
+        "width": 200,
+        "height": 200
+      },
+      "weight": "cfvghbhj",
+      "comments": [
+        "empty"
+      ],
+      "id": 4
+    },
+    {
+      "imageUrl": "https://eduk8.esn.org/sites/default/files/imce/develop%20yourself.png",
+      "name": "Product name 4",
+      "count": 43,
+      "size": {
+        "width": 200,
+        "height": 200
+      },
+      "weight": 200,
+      "comments": [
+        "CommentModel",
+        "CommentModel"
+      ],
+      "id": 5
+    },
+    {
+      "imageUrl": "https://eduk8.esn.org/sites/default/files/imce/develop%20yourself.png",
+      "name": "Product name 5",
+      "count": 10,
+      "size": {
+        "width": 200,
+        "height": 200
+      },
+      "weight": 500,
+      "comments": [
+        "empty"
+      ],
+      "id": 6
+    },
+    {
+      "imageUrl": "https://eduk8.esn.org/sites/default/files/imce/develop%20yourself.png",
+      "name": "Product name 6",
+      "count": "33",
+      "size": "200",
+      "weight": "150",
+      "comments": [
+        "150"
+      ],
+      "id": 7
+    }
+  ],
+  "comments": {
+    "id": 3,
+    "productId": 1,
+    "description": "some text here",
+    "date": "14:00 22.08.2021"
+  }
+}
