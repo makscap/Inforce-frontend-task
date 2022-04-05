@@ -121,7 +121,8 @@
   max-height: 150px;
   border: 1px solid gray;
   margin-top: 20px;
-  overflow: auto;
+  overflow-y: scroll;
+  -webkit-overflow-scrolling: touch;
 
 }
 
