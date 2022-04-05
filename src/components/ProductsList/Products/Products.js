@@ -52,9 +52,12 @@ export function Products() {
     );
 
     if (attention) {
-      fetch(`http://localhost:8000/product/${e.target.id}`, {
-        method: "DELETE",
-      }).then((e) => e.json());
+      fetch(
+        `https://product-shop-json-server.herokuapp.com/product/${e.target.id}`,
+        {
+          method: "DELETE",
+        }
+      ).then((e) => e.json());
       // Save it!
       console.log("Product was deleted from the database.");
     } else {

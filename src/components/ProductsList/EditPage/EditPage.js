@@ -43,14 +43,19 @@ export function EditPage() {
 
     e.preventDefault();
 
-    fetch(`http://localhost:8000/product/${String(productId)}`, {
-      method: "PUT",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(productSelected),
-    }).then((result) => {
+    fetch(
+      `https://product-shop-json-server.herokuapp.com/product/${String(
+        productId
+      )}`,
+      {
+        method: "PUT",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(productSelected),
+      }
+    ).then((result) => {
       result.json().then((resp) => {
         console.warn(resp);
         console.warn(productId);

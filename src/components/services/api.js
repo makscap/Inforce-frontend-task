@@ -1,5 +1,5 @@
 export async function getApi() {
-  return await fetch("http://localhost:8000/product").then((response) =>
-    response.json()
-  );
+  return await fetch(
+    "https://product-shop-json-server.herokuapp.com/product"
+  ).then((response) => response.json());
 }

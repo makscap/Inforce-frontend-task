@@ -51,7 +51,7 @@ const ButtonAddProduct = () => {
       item.weight?.trim() &&
       String(item.comments)?.trim()
     ) {
-      fetch("http://localhost:8000/product", {
+      fetch("https://product-shop-json-server.herokuapp.com/product", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
