@@ -9,8 +9,8 @@ React, Redux, Bootstrap, react-icons ...
 In the project directory, you can run:
 
 ### `npm start`
-!! This project uses heroku database! https://product-shop-api.herokuapp.com/product
-!! If you want to use localhost then you must change https://product-shop-api.herokuapp.com/product to https://localhost:8000/product
+!! This project uses heroku database! https://product-shop-api.herokuapp.com/product <br />
+!! If you want to use localhost then you must change https://product-shop-api.herokuapp.com/product to https://localhost:8000/product <br />
 
 Runs the app in the development mode.<br />
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
@@ -19,8 +19,8 @@ The page will reload if you make edits.<br />
 You will also see any lint errors in the console.
 
 ### `npm run api`
-!! This project uses heroku database! https://product-shop-api.herokuapp.com/product
-!! If you want to use localhost then you must change https://product-shop-api.herokuapp.com/product to https://localhost:8000/product
+!! This project uses heroku database! https://product-shop-api.herokuapp.com/product <br />
+!! If you want to use localhost then you must change https://product-shop-api.herokuapp.com/product to https://localhost:8000/product <br />
 
 Runs the app (backend) in the development mode.<br />
 Open [http://localhost:3000](http://localhost:8000) to view it in the browser.
