@@ -32,7 +32,6 @@
     "shop"
   ],
   "author": "Maksym Borysov",
-  "homepage": "https://github.com/makscap",
   "browserslist": {
     "production": [
       ">0.2%",
