@@ -47,24 +47,25 @@ export function Products() {
   const handleShow = () => setShowModal(true);
 
   const deleteProduct = (e) => {
-    const attention = window.confirm(
-      "Are you sure you want to delete this product from the database?"
-    );
+    // const attention = window.confirm(
+    //   "Are you sure you want to delete this product from the database?"
+    // );
 
-    if (attention) {
-      fetch(
-        `https://product-shop-json-server.herokuapp.com/product/${e.target.id}`,
-        {
-          method: "DELETE",
-        }
-      ).then((e) => e.json());
-      // Save it!
-      console.log("Product was deleted from the database.");
-    } else {
-      // Do nothing!
-      console.log("Product was not deleted from the database.");
-    }
+    // if (attention) {
+    fetch(
+      `https://product-shop-json-server.herokuapp.com/product/${e.target.id}`,
+      {
+        method: "DELETE",
+      }
+    ).then((e) => e.json());
+    // Save it!
+    //   console.log("Product was deleted from the database.");
+    // } else {
+    //   // Do nothing!
+    //   console.log("Product was not deleted from the database.");
+    // }
 
+    getApi();
     dispatch(getIsRefresh(true));
   };
 
