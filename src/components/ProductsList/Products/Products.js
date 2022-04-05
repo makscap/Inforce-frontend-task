@@ -52,12 +52,9 @@ export function Products() {
     // );
 
     // if (attention) {
-    fetch(
-      `https://product-shop-json-server.herokuapp.com/product/${e.target.id}`,
-      {
-        method: "DELETE",
-      }
-    ).then((e) => e.json());
+    fetch(`https://product-shop-api.herokuapp.com/product/${e.target.id}`, {
+      method: "DELETE",
+    }).then((e) => e.json());
     // Save it!
     //   console.log("Product was deleted from the database.");
     // } else {

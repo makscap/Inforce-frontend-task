@@ -44,9 +44,7 @@ export function EditPage() {
     e.preventDefault();
 
     fetch(
-      `https://product-shop-json-server.herokuapp.com/product/${String(
-        productId
-      )}`,
+      `https://product-shop-api.herokuapp.com/product/${String(productId)}`,
       {
         method: "PUT",
         headers: {
