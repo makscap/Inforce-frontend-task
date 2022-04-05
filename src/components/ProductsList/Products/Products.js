@@ -18,7 +18,7 @@ import { AiOutlineDelete, AiOutlineEdit } from "react-icons/ai";
 
 export function Products() {
   const [showModal, setShowModal] = useState(false);
-  const [comment, setComment] = useState(null);
+  const [comment, setComment] = useState("");
 
   const dispatch = useDispatch();
   const productSelectedInformation = useSelector(
@@ -79,6 +79,7 @@ export function Products() {
     // dispatch(changeNewProduct((newProduct = "")));
     // dispatch(changeIsOpenModalAddProduct(false));
     dispatch(getIsRefresh(true));
+    setComment("");
     setShowModal(false);
 
     return;
