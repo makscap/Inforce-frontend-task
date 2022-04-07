@@ -12,6 +12,7 @@ import React, { useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { getApi } from "../../services/api";
+import { GrAdd, GrChapterAdd } from "react-icons/gr";
 
 const ButtonAddProduct = () => {
   const [fieldForm, setFieldForm] = useState(false);
@@ -138,14 +139,15 @@ const ButtonAddProduct = () => {
           dispatch(changeIsOpenModalAddProduct(true));
         }}
       >
-        ADD PRODUCT
+        <GrAdd />
       </button>
       <button
         type="button"
         className={s.buttonAddSome}
         onClick={postSomeProduct}
       >
-        QUICK ADD
+        <GrChapterAdd />
+        {/* QUICK ADD */}
       </button>
 
       <Modal show={IsOpenModalAddProduct} onHide={handleClose}>

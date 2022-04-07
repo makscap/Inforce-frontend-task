@@ -258,7 +258,25 @@ border: 1px solid rgb(192, 192, 192);
 }
 
 .inputSearch {
-  width: 500px;
+  width: 600px;
   margin-top: 25px;
   opacity: 50%;
+}
+
+@media screen and (min-width: 368px) and (max-width: 767px) {
+.inputSearch {
+  width: calc(100% - 40px);
+
+  margin-top: 25px;
+  opacity: 50%;
+}
+}
+
+@media screen and (max-width: 367px) {
+.inputSearch {
+  width: calc(100% - 10px);
+
+  margin-top: 25px;
+  opacity: 50%;
+}
 }
