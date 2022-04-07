@@ -17,10 +17,15 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { AiOutlineDelete, AiOutlineEdit } from "react-icons/ai";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import {
+  changeSearchProduct,
+  selectSearchProduct,
+} from "../../ProductsList/SearchLine/SearchLine-slice";
 
 export function Products() {
   const [showModal, setShowModal] = useState(false);
   const [comment, setComment] = useState("");
+  const [filteredProduct, setFiltredProduct] = useState("");
 
   const dispatch = useDispatch();
   const productSelectedInformation = useSelector(
@@ -28,6 +33,17 @@ export function Products() {
   );
   const products = useSelector(selectProducts);
   const isRefresh = useSelector(selectIsRefresh);
+
+  const dataSearch = (e) => {
+    let valueInput = e.target.value;
+
+    const newFilter = products.filter((value) => {
+      return value.name.toLowerCase().includes(valueInput.toLowerCase());
+    });
+
+    setFiltredProduct(newFilter);
+    dispatch(changeSearchProduct(newFilter));
+  };
 
   useEffect(() => {
     getApi().then((data) => {
@@ -48,10 +64,15 @@ export function Products() {
   const handleClose = () => setShowModal(false);
   const handleShow = () => setShowModal(true);
 
-  const deleteProduct = (e) => {
-    fetch(`https://product-shop-api.herokuapp.com/product/${e.target.id}`, {
-      method: "DELETE",
-    }).then((e) => e.json());
+  const deleteProduct = async (e) => {
+    console.log("deleted product #", e.target.id);
+
+    await fetch(
+      `https://product-shop-api.herokuapp.com/product/${e.target.id}`,
+      {
+        method: "DELETE",
+      }
+    ).then((e) => console.log(e.json()));
 
     getApi();
     dispatch(getIsRefresh(true));
@@ -88,70 +109,140 @@ export function Products() {
   return (
     <div className="container">
       <ToastContainer />
+      <div className={s.sortGroup} onChange={dataSearch}>
+        <form>
+          <input
+            placeholder="Find your product ... "
+            className={s.inputSearch}
+          ></input>
+        </form>
+      </div>
       <h1 className={s.title}>PRODUCT LIST:</h1>
       <SortLine />
 
       <ul className="card-set list">
-        {products.map((e) => (
-          <li className="card-set__item" key={e.id} id={e.id}>
-            <ul
-              className=" list"
-              style={{ paddingTop: "20px", marginTop: "0px" }}
-            >
-              <li className="card-set__text">
-                <img
-                  src={e.imageUrl}
-                  alt={e.name}
-                  width="320px"
-                  height="240px"
-                ></img>
+        {filteredProduct
+          ? filteredProduct.map((e) => (
+              <li className="card-set__item" key={e.id} id={e.id}>
+                <ul
+                  className=" list"
+                  style={{ paddingTop: "20px", marginTop: "0px" }}
+                >
+                  <li className="card-set__text">
+                    <img
+                      src={e.imageUrl}
+                      alt={e.name}
+                      width="320px"
+                      height="240px"
+                    ></img>
+                  </li>
+                  <li className="card-set__text">
+                    <h3>{e.name}</h3>
+                  </li>
+                  <li className="card-set__text">
+                    <span style={{ fontWeight: "bold" }}>Quantity: </span>
+                    {e.count}
+                  </li>
+                  <li className="card-set__text">
+                    <span style={{ fontWeight: "bold" }}>Weight: </span>
+                    {e.weight}
+                  </li>
+                </ul>
+                <div></div>
+                <div className={s.buttonGroup}>
+                  <button
+                    type="button"
+                    className={s.buttonMore}
+                    onClick={() => {
+                      handleShow();
+                      dispatch(getProductSelectedForInformation(e));
+                    }}
+                  >
+                    MORE
+                  </button>
+                  <button
+                    type="button"
+                    className={s.buttonEdit}
+                    onClick={() => {
+                      dispatch(getProductSelected(e));
+                      toast.info("The edit page is open! Please, scroll up!");
+                    }}
+                  >
+                    <AiOutlineEdit />
+                  </button>
+                  <button
+                    type="button"
+                    className={s.buttonRemove}
+                    onClick={deleteProduct}
+                    key={e.id}
+                    id={e.id}
+                  >
+                    <AiOutlineDelete />
+                  </button>
+                </div>
               </li>
-              <li className="card-set__text">
-                <h3>{e.name}</h3>
+            ))
+          : products.map((e) => (
+              <li className="card-set__item" key={e.id} id={e.id}>
+                <ul
+                  className=" list"
+                  style={{ paddingTop: "20px", marginTop: "0px" }}
+                >
+                  <li className="card-set__text">
+                    <img
+                      src={e.imageUrl}
+                      alt={e.name}
+                      width="320px"
+                      height="240px"
+                    ></img>
+                  </li>
+                  <li className="card-set__text">
+                    <h3>{e.name}</h3>
+                  </li>
+                  <li className="card-set__text">
+                    <span style={{ fontWeight: "bold" }}>Quantity: </span>
+                    {e.count}
+                  </li>
+                  <li className="card-set__text">
+                    <span style={{ fontWeight: "bold" }}>Weight: </span>
+                    {e.weight}
+                  </li>
+                </ul>
+                <div></div>
+                <div className={s.buttonGroup}>
+                  <button
+                    type="button"
+                    className={s.buttonMore}
+                    onClick={() => {
+                      handleShow();
+                      dispatch(getProductSelectedForInformation(e));
+                    }}
+                  >
+                    MORE
+                  </button>
+                  <button
+                    type="button"
+                    className={s.buttonEdit}
+                    onClick={() => {
+                      dispatch(getProductSelected(e));
+                      toast.info("The edit page is open! Please, scroll up!");
+                    }}
+                  >
+                    <AiOutlineEdit />
+                  </button>
+                  <button
+                    type="button"
+                    className={s.buttonRemove}
+                    onClick={deleteProduct}
+                    key={e.id}
+                    id={e.id}
+                  >
+                    <AiOutlineDelete />
+                  </button>
+                </div>
               </li>
-              <li className="card-set__text">
-                <span style={{ fontWeight: "bold" }}>Quantity: </span>
-                {e.count}
-              </li>
-              <li className="card-set__text">
-                <span style={{ fontWeight: "bold" }}>Weight: </span>
-                {e.weight}
-              </li>
-            </ul>
-            <div></div>
-            <div className={s.buttonGroup}>
-              <button
-                type="button"
-                className={s.buttonMore}
-                onClick={() => {
-                  handleShow();
-                  dispatch(getProductSelectedForInformation(e));
-                }}
-              >
-                MORE
-              </button>
-              <button
-                type="button"
-                className={s.buttonEdit}
-                onClick={() => {
-                  dispatch(getProductSelected(e));
-                  toast.info("The edit page is open! Please, scroll up!");
-                }}
-              >
-                <AiOutlineEdit />
-              </button>
-              <button
-                type="button"
-                className={s.buttonRemove}
-                onClick={deleteProduct}
-                key={e.id}
-                id={e.id}
-              >
-                <AiOutlineDelete />
-              </button>
-            </div>
-          </li>
-        ))}
+            ))}
+
         <Modal show={showModal} onHide={handleClose}>
           <Modal.Header closeButton>
             <Modal.Title>
@@ -201,12 +292,10 @@ export function Products() {
                     {productSelectedInformation &&
                       productSelectedInformation.comments.map((e, i) => (
                         <li className={s.comments_item} key={i}>
-                          {/* <textarea> */}
                           <p className={s.list}>
                             <span>ID: {i}</span>
                           </p>
                           <p className={s.list}>{e}</p>
-                          {/* </textarea> */}
                         </li>
                       ))}
                   </ul>
@@ -226,7 +315,12 @@ export function Products() {
               <button
                 className={comment ? s.feedback : s.crash}
                 disabled={!comment}
-                onClick={(e) => postComment(e)}
+                onClick={(e) => {
+                  postComment(e);
+                  toast.success(
+                    "Thank you! You feedback was successfuly added!"
+                  );
+                }}
               >
                 LEAVE FEEDBACK
               </button>

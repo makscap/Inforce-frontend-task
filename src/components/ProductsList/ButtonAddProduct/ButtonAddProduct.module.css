@@ -4,9 +4,9 @@
 }
 
 .buttonAdd {
-  width: 180px;
+  width: 140px;
   height: 50px;
-  background-color: rgb(159, 255, 147);
+  background-color: rgb(212, 255, 206);
   border: 1px solid black;
   box-shadow: rgba(0, 0, 0, 0.02) 0 1px 3px 0;
   color: #000;
@@ -31,6 +31,38 @@
   box-shadow: rgba(0, 0, 0, .06) 0 2px 4px;
   transform: translateY(0);
 }
+
+
+.buttonAddSome {
+  width: 140px;
+  height: 50px;
+  background-color: rgb(184, 201, 255);
+  border: 1px solid black;
+  box-shadow: rgba(0, 0, 0, 0.02) 0 1px 3px 0;
+  color: #000;
+  cursor: pointer;
+  font-size: 16px;
+  line-height: 1.25;
+  text-decoration: none;
+  transition: all 250ms;
+  margin-right: 20px;
+}
+
+.buttonAddSome:hover,
+.buttonAddSome:focus {
+  box-shadow: rgba(0, 0, 0, 0.1) 0 4px 12px;
+}
+
+.buttonAddSome:hover {
+  transform: translateY(-1px);
+}
+
+.buttonAddSome:active {
+  box-shadow: rgba(0, 0, 0, .06) 0 2px 4px;
+  transform: translateY(0);
+}
+
+
 
 .label {
   width: 100px;

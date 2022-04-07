@@ -6,6 +6,7 @@ import {
 } from "../Products/Products-slice";
 import s from "./EditPage.module.css";
 import { useState } from "react";
+import { getApi } from "../../services/api";
 
 export function EditPage() {
   const [width, setWidth] = useState("");
@@ -18,6 +19,9 @@ export function EditPage() {
   const updateProduct = (e) => {
     e.preventDefault();
 
+    let copy = Object.assign({}, productSelected);
+    copy.size = { ...productSelected, width: width, height: height };
+
     fetch(
       `https://product-shop-api.herokuapp.com/product/${String(productId)}`,
       {
@@ -26,7 +30,7 @@ export function EditPage() {
           Accept: "application/json",
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(productSelected),
+        body: JSON.stringify(copy),
       }
     ).then((result) => {
       result.json().then((resp) => {
@@ -34,6 +38,9 @@ export function EditPage() {
         dispatch(getProductSelected(""));
       });
     });
+
+    getApi();
+    dispatch(getIsRefresh(true));
   };
 
   return (
@@ -96,16 +103,16 @@ export function EditPage() {
             <span className={s.titleInput}>width:</span>
             <input
               type="number"
-              value={productSelected?.size[0]}
+              // value={productSelected.size.width}
               className={s.input}
               onChange={(e) => {
                 setWidth(Number(e.target.value));
-                dispatch(
-                  getProductSelected({
-                    ...productSelected,
-                    size: { width, height },
-                  })
-                );
+                // dispatch(
+                //   getProductSelected({
+                //     ...productSelected,
+                //     size: { width, height },
+                //   })
+                // );
               }}
             ></input>
           </label>
@@ -114,16 +121,16 @@ export function EditPage() {
             <span className={s.titleInput}>height:</span>
             <input
               type="number"
-              value={productSelected?.size[1]}
+              // value={productSelected.size.height}
               className={s.input}
               onChange={(e) => {
                 setHeight(Number(e.target.value));
-                dispatch(
-                  getProductSelected({
-                    ...productSelected,
-                    size: { width, height },
-                  })
-                );
+                // dispatch(
+                //   getProductSelected({
+                //     ...productSelected.size,
+                //     height: e.target.value,
+                //   })
+                // );
               }}
             ></input>
           </label>

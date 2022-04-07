@@ -5,7 +5,7 @@ import {
   changeNewProduct,
   selectNewProduct,
 } from "./ButtonAddProduct-slice";
-import { getIsRefresh } from "../Products/Products-slice";
+import { getIsRefresh, selectProducts } from "../Products/Products-slice";
 import Modal from "react-bootstrap/Modal";
 import s from "./ButtonAddProduct.module.css";
 import React, { useState } from "react";
@@ -21,6 +21,7 @@ const ButtonAddProduct = () => {
   const dispatch = useDispatch();
   let IsOpenModalAddProduct = useSelector(selectIsOpenModalAddProduct);
   let newProduct = useSelector(selectNewProduct);
+  let allProducts = useSelector(selectProducts);
 
   const postProduct = (e) => {
     e.preventDefault();
@@ -89,6 +90,44 @@ const ButtonAddProduct = () => {
     setFieldForm(false);
   };
 
+  const postSomeProduct = (e) => {
+    e.preventDefault();
+
+    const findEl = Math.max.apply(
+      Math,
+      allProducts.map(function (e) {
+        return e.id;
+      })
+    );
+
+    console.log("findEl ~ findEl", findEl);
+
+    const item = {
+      imageUrl:
+        "https://avatars.mds.yandex.net/get-mpic/4529531/img_id8845833908614038895.jpeg/orig",
+      name: `NEW PRODUCT ${findEl}`,
+      count: 15,
+      weight: 155,
+      comments: [
+        "Synonyms for SOMETHING: being, commodity, entity, existent, individual, individuality, integer, object.",
+      ],
+      size: { width: 155, height: 155 },
+    };
+
+    fetch(`https://product-shop-api.herokuapp.com/product/`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(item),
+    }).then((data) => {
+      console.log("new some product added");
+      data.json();
+    });
+    dispatch(getIsRefresh(true));
+    return;
+  };
+
   return (
     <div>
       <ToastContainer />
@@ -100,6 +139,13 @@ const ButtonAddProduct = () => {
         }}
       >
         ADD PRODUCT
+      </button>
+      <button
+        type="button"
+        className={s.buttonAddSome}
+        onClick={postSomeProduct}
+      >
+        QUICK ADD
       </button>
 
       <Modal show={IsOpenModalAddProduct} onHide={handleClose}>
