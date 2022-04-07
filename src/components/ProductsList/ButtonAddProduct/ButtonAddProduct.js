@@ -125,6 +125,9 @@ const ButtonAddProduct = () => {
       console.log("new some product added");
       data.json();
     });
+
+    toast.success("The product was added! You can find it at the bottom page.");
+
     dispatch(getIsRefresh(true));
     return;
   };
