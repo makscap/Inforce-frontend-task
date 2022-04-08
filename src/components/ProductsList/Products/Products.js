@@ -21,11 +21,12 @@ import {
   changeSearchProduct,
   selectSearchProduct,
 } from "../../ProductsList/SearchLine/SearchLine-slice";
+import Spinner from "../../Spinner/Spinner";
 
 export function Products() {
   const [showModal, setShowModal] = useState(false);
   const [comment, setComment] = useState("");
-  const [filteredProduct, setFiltredProduct] = useState("");
+  const [filteredProduct, setFiltredProduct] = useState(" ");
 
   const dispatch = useDispatch();
   const productSelectedInformation = useSelector(
@@ -106,8 +107,29 @@ export function Products() {
     return;
   };
 
+  if (products.length === 0) {
+    return (
+      <div className="container">
+        <div className={s.sortGroup} onChange={dataSearch}>
+          <form>
+            <input
+              placeholder="Find your product ... "
+              className={s.inputSearch}
+            ></input>
+          </form>
+        </div>
+        <h1 className={s.title}>PRODUCT LIST:</h1>
+        <SortLine />
+        <Spinner />
+      </div>
+    );
+  }
+
+  console.log("Products ~ filteredProduct", filteredProduct);
+
   return (
     <div className="container">
+      {/* <Spinner /> */}
       <ToastContainer />
       <div className={s.sortGroup} onChange={dataSearch}>
         <form>
@@ -120,8 +142,17 @@ export function Products() {
       <h1 className={s.title}>PRODUCT LIST:</h1>
       <SortLine />
 
+      {filteredProduct.length ? (
+        ""
+      ) : (
+        <p>
+          Sorry, we can't find any items. Try to change item's name in the
+          search line.
+        </p>
+      )}
+
       <ul className="card-set list">
-        {filteredProduct
+        {filteredProduct && filteredProduct !== " "
           ? filteredProduct.map((e) => (
               <li className="card-set__item" key={e.id} id={e.id}>
                 <ul

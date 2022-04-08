@@ -1,0 +1,6 @@
+.spiner {
+  display: flex;
+  height: calc(100vh - 72px);
+  align-items: center;
+  justify-content: center;
+}
