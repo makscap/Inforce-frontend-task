@@ -4,8 +4,6 @@ import { useSelector, useDispatch } from "react-redux";
 import {
   getProducts,
   selectProducts,
-  getProductSelected,
-  getProductSelectedForInformation,
   selectProductSelectedForInformation,
   selectIsRefresh,
   getIsRefresh,
@@ -14,19 +12,21 @@ import { SortLine } from "../SortLine/SortLine";
 import Modal from "react-bootstrap/Modal";
 import s from "./Products.module.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { AiOutlineDelete, AiOutlineEdit } from "react-icons/ai";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import {
-  changeSearchProduct,
-  selectSearchProduct,
-} from "../../ProductsList/SearchLine/SearchLine-slice";
+import { changeSearchProduct } from "../../ProductsList/SearchLine/SearchLine-slice";
 import Spinner from "../../Spinner/Spinner";
+import Pagination from "../../Pagination/Pagination";
+import Items from "../../Items/Items";
+import FilterProduct from "../FilterProduct/FilterProduct";
 
 export function Products() {
   const [showModal, setShowModal] = useState(false);
   const [comment, setComment] = useState("");
   const [filteredProduct, setFiltredProduct] = useState(" ");
+
+  const [currentPage, setCurrentPage] = useState(1); // Pagination
+  const [productsPerPage] = useState(2); // Pagination
 
   const dispatch = useDispatch();
   const productSelectedInformation = useSelector(
@@ -34,6 +34,7 @@ export function Products() {
   );
   const products = useSelector(selectProducts);
   const isRefresh = useSelector(selectIsRefresh);
+  const BASE_URL = "https://product-shop-api.herokuapp.com/product";
 
   const dataSearch = (e) => {
     let valueInput = e.target.value;
@@ -68,12 +69,9 @@ export function Products() {
   const deleteProduct = async (e) => {
     console.log("deleted product #", e.target.id);
 
-    await fetch(
-      `https://product-shop-api.herokuapp.com/product/${e.target.id}`,
-      {
-        method: "DELETE",
-      }
-    ).then((e) => console.log(e.json()));
+    await fetch(`BASE_URL/${e.target.id}`, {
+      method: "DELETE",
+    }).then((e) => console.log(e.json()));
 
     getApi();
     dispatch(getIsRefresh(true));
@@ -110,8 +108,8 @@ export function Products() {
   if (products.length === 0) {
     return (
       <div className="container">
-        <div className={s.sortGroup} onChange={dataSearch}>
-          <form>
+        <div className={s.sortGroup}>
+          <form onChange={dataSearch}>
             <input
               placeholder="Find your product ... "
               className={s.inputSearch}
@@ -125,11 +123,13 @@ export function Products() {
     );
   }
 
-  console.log("Products ~ filteredProduct", filteredProduct);
+  const lastProductIndex = currentPage * productsPerPage; // Pagination
+  const firstProductIndex = lastProductIndex - productsPerPage; // Pagination
+  const currentProduct = products.slice(firstProductIndex, lastProductIndex); // Pagination
+  const paginate = (pageNumber) => setCurrentPage(pageNumber); // Pagination
 
   return (
     <div className="container">
-      {/* <Spinner /> */}
       <ToastContainer />
       <div className={s.sortGroup} onChange={dataSearch}>
         <form>
@@ -150,224 +150,114 @@ export function Products() {
           search line.
         </p>
       )}
+      {filteredProduct && filteredProduct !== " " ? (
+        <FilterProduct
+          filteredProduct={filteredProduct}
+          handleShow={handleShow}
+          deleteProduct={deleteProduct}
+        />
+      ) : (
+        <Items
+          products={currentProduct}
+          handleShow={handleShow}
+          deleteProduct={deleteProduct}
+        />
+      )}
 
-      <ul className="card-set list">
-        {filteredProduct && filteredProduct !== " "
-          ? filteredProduct.map((e) => (
-              <li className="card-set__item" key={e.id} id={e.id}>
-                <ul
-                  className=" list"
-                  style={{ paddingTop: "20px", marginTop: "0px" }}
-                >
-                  <li className="card-set__text">
-                    <img
-                      src={e.imageUrl}
-                      alt={e.name}
-                      width="320px"
-                      height="240px"
-                    ></img>
-                  </li>
-                  <li className="card-set__text">
-                    <h3>{e.name}</h3>
-                  </li>
-                  <li className="card-set__text">
-                    <span style={{ fontWeight: "bold" }}>Quantity: </span>
-                    {e.count}
-                  </li>
-                  <li className="card-set__text">
-                    <span style={{ fontWeight: "bold" }}>Weight: </span>
-                    {e.weight}
-                  </li>
+      <Modal show={showModal} onHide={handleClose}>
+        <Modal.Header closeButton>
+          <Modal.Title>
+            <span>Product card</span>
+          </Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <img
+            src={productSelectedInformation?.imageUrl}
+            alt={productSelectedInformation?.name}
+            width="465px"
+            className={s.image}
+          ></img>
+          <ul className={s.card}>
+            <li className="card-set__text"></li>
+            <li className="card-set__text">
+              <h3 className={s.list}>
+                Name: {productSelectedInformation?.name}
+              </h3>
+            </li>
+            <li className="card-set__text">
+              <p className={s.list}>
+                count: {productSelectedInformation?.count}
+              </p>
+            </li>
+            <li className="card-set__text">
+              <p className={s.list}>
+                size: {productSelectedInformation?.size?.width}
+                {productSelectedInformation?.size?.width &&
+                  productSelectedInformation?.size?.height && <span> x </span>}
+                {productSelectedInformation?.size?.height}
+              </p>
+            </li>
+
+            <li className="card-set__text">
+              <p className={s.list}>
+                weight:{productSelectedInformation?.weight}
+              </p>
+            </li>
+            {productSelectedInformation && (
+              <li className={s.comments_item}>
+                <p className={s.list}>Comments: </p>
+
+                <ul className={s.comments_list}>
+                  {productSelectedInformation &&
+                    productSelectedInformation.comments.map((e, i) => (
+                      <li className={s.comments_item} key={i}>
+                        <p className={s.list}>
+                          <span>ID: {i}</span>
+                        </p>
+                        <p className={s.list}>{e}</p>
+                      </li>
+                    ))}
                 </ul>
-                <div></div>
-                <div className={s.buttonGroup}>
-                  <button
-                    type="button"
-                    className={s.buttonMore}
-                    onClick={() => {
-                      handleShow();
-                      dispatch(getProductSelectedForInformation(e));
-                    }}
-                  >
-                    MORE
-                  </button>
-                  <button
-                    type="button"
-                    className={s.buttonEdit}
-                    onClick={() => {
-                      dispatch(getProductSelected(e));
-                      toast.info("The edit page is open! Please, scroll up!");
-                    }}
-                  >
-                    <AiOutlineEdit />
-                  </button>
-                  <button
-                    type="button"
-                    className={s.buttonRemove}
-                    onClick={deleteProduct}
-                    key={e.id}
-                    id={e.id}
-                  >
-                    <AiOutlineDelete />
-                  </button>
-                </div>
               </li>
-            ))
-          : products.map((e) => (
-              <li className="card-set__item" key={e.id} id={e.id}>
-                <ul
-                  className=" list"
-                  style={{ paddingTop: "20px", marginTop: "0px" }}
-                >
-                  <li className="card-set__text">
-                    <img
-                      src={e.imageUrl}
-                      alt={e.name}
-                      width="320px"
-                      height="240px"
-                    ></img>
-                  </li>
-                  <li className="card-set__text">
-                    <h3>{e.name}</h3>
-                  </li>
-                  <li className="card-set__text">
-                    <span style={{ fontWeight: "bold" }}>Quantity: </span>
-                    {e.count}
-                  </li>
-                  <li className="card-set__text">
-                    <span style={{ fontWeight: "bold" }}>Weight: </span>
-                    {e.weight}
-                  </li>
-                </ul>
-                <div></div>
-                <div className={s.buttonGroup}>
-                  <button
-                    type="button"
-                    className={s.buttonMore}
-                    onClick={() => {
-                      handleShow();
-                      dispatch(getProductSelectedForInformation(e));
-                    }}
-                  >
-                    MORE
-                  </button>
-                  <button
-                    type="button"
-                    className={s.buttonEdit}
-                    onClick={() => {
-                      dispatch(getProductSelected(e));
-                      toast.info("The edit page is open! Please, scroll up!");
-                    }}
-                  >
-                    <AiOutlineEdit />
-                  </button>
-                  <button
-                    type="button"
-                    className={s.buttonRemove}
-                    onClick={deleteProduct}
-                    key={e.id}
-                    id={e.id}
-                  >
-                    <AiOutlineDelete />
-                  </button>
-                </div>
-              </li>
-            ))}
-
-        <Modal show={showModal} onHide={handleClose}>
-          <Modal.Header closeButton>
-            <Modal.Title>
-              <span>Product card</span>
-            </Modal.Title>
-          </Modal.Header>
-          <Modal.Body>
-            <img
-              src={productSelectedInformation?.imageUrl}
-              alt={productSelectedInformation?.name}
-              width="465px"
-              className={s.image}
-            ></img>
-            <ul className={s.card}>
-              <li className="card-set__text"></li>
-              <li className="card-set__text">
-                <h3 className={s.list}>
-                  Name: {productSelectedInformation?.name}
-                </h3>
-              </li>
-              <li className="card-set__text">
-                <p className={s.list}>
-                  count: {productSelectedInformation?.count}
-                </p>
-              </li>
-              <li className="card-set__text">
-                <p className={s.list}>
-                  size: {productSelectedInformation?.size?.width}
-                  {productSelectedInformation?.size?.width &&
-                    productSelectedInformation?.size?.height && (
-                      <span> x </span>
-                    )}
-                  {productSelectedInformation?.size?.height}
-                </p>
-              </li>
-
-              <li className="card-set__text">
-                <p className={s.list}>
-                  weight:{productSelectedInformation?.weight}
-                </p>
-              </li>
-              {productSelectedInformation && (
-                <li className={s.comments_item}>
-                  <p className={s.list}>Comments: </p>
-
-                  <ul className={s.comments_list}>
-                    {productSelectedInformation &&
-                      productSelectedInformation.comments.map((e, i) => (
-                        <li className={s.comments_item} key={i}>
-                          <p className={s.list}>
-                            <span>ID: {i}</span>
-                          </p>
-                          <p className={s.list}>{e}</p>
-                        </li>
-                      ))}
-                  </ul>
-                </li>
-              )}
-            </ul>
-          </Modal.Body>
-          <Modal.Footer>
-            <form className={s.formComment}>
-              <input
-                type="text"
-                onChange={(e) => {
-                  setComment(e.target.value);
-                }}
-                className={s.formItems}
-              ></input>
-              <button
-                className={comment ? s.feedback : s.crash}
-                disabled={!comment}
-                onClick={(e) => {
-                  postComment(e);
-                  toast.success(
-                    "Thank you! You feedback was successfuly added!"
-                  );
-                }}
-              >
-                LEAVE FEEDBACK
-              </button>
-              <button
-                className={s.close}
-                onClick={(e) => {
-                  e.preventDefault();
-                  handleClose(e);
-                }}
-              >
-                CLOSE
-              </button>
-            </form>
-          </Modal.Footer>
-        </Modal>
-      </ul>
+            )}
+          </ul>
+        </Modal.Body>
+        <Modal.Footer>
+          <form className={s.formComment}>
+            <input
+              type="text"
+              onChange={(e) => {
+                setComment(e.target.value);
+              }}
+              className={s.formItems}
+            ></input>
+            <button
+              className={comment ? s.feedback : s.crash}
+              disabled={!comment}
+              onClick={(e) => {
+                postComment(e);
+                toast.success("Thank you! You feedback was successfuly added!");
+              }}
+            >
+              LEAVE FEEDBACK
+            </button>
+            <button
+              className={s.close}
+              onClick={(e) => {
+                e.preventDefault();
+                handleClose(e);
+              }}
+            >
+              CLOSE
+            </button>
+          </form>
+        </Modal.Footer>
+      </Modal>
+      <Pagination
+        productsPerPage={productsPerPage}
+        totalProducts={products.length}
+        paginate={paginate}
+      />
     </div>
   );
 }

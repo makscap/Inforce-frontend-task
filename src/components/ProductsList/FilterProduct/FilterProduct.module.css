@@ -1,0 +1,93 @@
+.buttonMore {
+  width: 180px;
+  height: 50px;
+  background-color: lightblue;
+  border: 0px;
+  box-shadow: rgba(0, 0, 0, 0.02) 0 1px 3px 0;
+  color: #000;
+  cursor: pointer;
+  font-size: 16px;
+  line-height: 1.25;
+  text-decoration: none;
+  transition: all 250ms;
+  margin: 0px;
+  margin-right: 10px;
+}
+
+.buttonMore:hover,
+.buttonMore:focus {
+  box-shadow: rgba(0, 0, 0, 0.1) 0 4px 12px;
+}
+
+.buttonMore:hover {
+  transform: translateY(-1px);
+}
+
+.buttonMore:active {
+  box-shadow: rgba(0, 0, 0, .06) 0 2px 4px;
+  transform: translateY(0);
+}
+
+.buttonRemove {
+  width: 50px;
+  height: 50px;
+  background-color: rgb(252, 199, 199);
+  border: 0px;
+  box-shadow: rgba(0, 0, 0, 0.02) 0 1px 3px 0;
+  color: #000;
+  cursor: pointer;
+  font-size: 16px;
+  line-height: 1.25;
+  text-decoration: none;
+  transition: all 250ms;
+  margin-bottom: 15px;
+}
+
+.buttonRemove:hover,
+.buttonRemove:focus {
+  box-shadow: rgba(0, 0, 0, 0.1) 0 4px 12px;
+}
+
+.buttonRemove:hover {
+  transform: translateY(-1px);
+}
+
+.buttonRemove:active {
+  box-shadow: rgba(0, 0, 0, .06) 0 2px 4px;
+  transform: translateY(0);
+}
+
+.buttonEdit {
+  width: 50px;
+  height: 50px;
+  background-color: rgb(252, 248, 199);
+  border: 0px;
+  box-shadow: rgba(0, 0, 0, 0.02) 0 1px 3px 0;
+  color: #000;
+  cursor: pointer;
+  font-size: 16px;
+  line-height: 1.25;
+  text-decoration: none;
+  transition: all 250ms;
+  margin-right: 10px;
+}
+
+.buttonEdit:hover,
+.buttonEdit:focus {
+  box-shadow: rgba(0, 0, 0, 0.1) 0 4px 12px;
+}
+
+.buttonEdit:hover {
+  transform: translateY(-1px);
+}
+
+.buttonEdit:active {
+  box-shadow: rgba(0, 0, 0, .06) 0 2px 4px;
+  transform: translateY(0);
+}
+
+.buttonGroup {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
