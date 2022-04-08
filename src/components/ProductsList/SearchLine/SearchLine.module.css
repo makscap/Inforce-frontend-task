@@ -1,17 +1,23 @@
-.container {
-  min-height: calc(100vh - 140px);
-    margin-left: auto;
-  margin-right: auto;
-  max-width: 1200px;
+.inputSearch {
+  width: 600px;
+  margin-top: 25px;
+  opacity: 50%;
 }
 
-.sortGroup {
-  display: flex;
-  justify-content: center;
-  margin-bottom: 10px;
+@media screen and (min-width: 368px) and (max-width: 767px) {
+.inputSearch {
+  width: calc(100% - 40px);
+
+  margin-top: 25px;
+  opacity: 50%;
+}
 }
 
-.label {
-  margin-right: 5px;
-}
+@media screen and (max-width: 367px) {
+.inputSearch {
+  width: calc(100% - 15px);
 
+  margin-top: 25px;
+  opacity: 50%;
+}
+}

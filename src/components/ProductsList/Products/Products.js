@@ -19,6 +19,7 @@ import Spinner from "../../Spinner/Spinner";
 import Pagination from "../../Pagination/Pagination";
 import Items from "../../Items/Items";
 import FilterProduct from "../FilterProduct/FilterProduct";
+import SearchLine from "../SearchLine/SearchLine";
 
 export function Products() {
   const [showModal, setShowModal] = useState(false);
@@ -26,7 +27,7 @@ export function Products() {
   const [filteredProduct, setFiltredProduct] = useState(" ");
 
   const [currentPage, setCurrentPage] = useState(1); // Pagination
-  const [productsPerPage] = useState(2); // Pagination
+  const [productsPerPage] = useState(6); // Pagination
 
   const dispatch = useDispatch();
   const productSelectedInformation = useSelector(
@@ -45,6 +46,7 @@ export function Products() {
 
     setFiltredProduct(newFilter);
     dispatch(changeSearchProduct(newFilter));
+    dispatch(getIsRefresh(true));
   };
 
   useEffect(() => {
@@ -69,7 +71,7 @@ export function Products() {
   const deleteProduct = async (e) => {
     console.log("deleted product #", e.target.id);
 
-    await fetch(`BASE_URL/${e.target.id}`, {
+    await fetch(`${BASE_URL}/${e.target.id}`, {
       method: "DELETE",
     }).then((e) => console.log(e.json()));
 
@@ -85,16 +87,13 @@ export function Products() {
       comments: [...productSelectedInformation.comments, comment],
     };
 
-    fetch(
-      `https://product-shop-api.herokuapp.com/product/${productSelectedInformation.id}`,
-      {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(item),
-      }
-    ).then((data) => {
+    fetch(`${BASE_URL}/${productSelectedInformation.id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(item),
+    }).then((data) => {
       console.log("new product added");
       data.json();
     });
@@ -131,15 +130,7 @@ export function Products() {
   return (
     <div className="container">
       <ToastContainer />
-      <div className={s.sortGroup} onChange={dataSearch}>
-        <form>
-          <input
-            placeholder="Find your product ... "
-            className={s.inputSearch}
-          ></input>
-        </form>
-      </div>
-      <h1 className={s.title}>PRODUCT LIST:</h1>
+      <SearchLine dataSearch={dataSearch} />
       <SortLine />
 
       {filteredProduct.length ? (

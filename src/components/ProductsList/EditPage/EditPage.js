@@ -34,7 +34,6 @@ export function EditPage() {
       }
     ).then((result) => {
       result.json().then((resp) => {
-        dispatch(getIsRefresh(true));
         dispatch(getProductSelected(""));
       });
     });

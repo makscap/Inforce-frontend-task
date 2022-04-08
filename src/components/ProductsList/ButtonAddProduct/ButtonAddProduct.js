@@ -58,7 +58,10 @@ const ButtonAddProduct = () => {
       });
 
       toast.success(
-        "The product was added! You can find it at the bottom page."
+        "The product was added! You can find it at the bottom page.",
+        {
+          toastId: "2",
+        }
       );
 
       dispatch(changeNewProduct((newProduct = "")));
@@ -124,9 +127,13 @@ const ButtonAddProduct = () => {
     }).then((data) => {
       console.log("new some product added");
       data.json();
+      toast.success(
+        "The product was added! You can find it at the bottom page.",
+        {
+          toastId: "2",
+        }
+      );
     });
-
-    toast.success("The product was added! You can find it at the bottom page.");
 
     dispatch(getIsRefresh(true));
     return;
@@ -134,7 +141,6 @@ const ButtonAddProduct = () => {
 
   return (
     <div>
-      <ToastContainer />
       <button
         type="button"
         className={s.buttonAdd}
