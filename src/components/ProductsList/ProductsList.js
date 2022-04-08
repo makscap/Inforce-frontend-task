@@ -8,11 +8,11 @@ import s from "./ProductsList.module.css";
 export function ProductsList() {
   const dispatch = useDispatch();
 
-  const ProductSelected = useSelector(selectProductSelected);
+  // const ProductSelected = useSelector(selectProductSelected);
 
   return (
     <main className={s.container}>
-      {ProductSelected ? <EditPage /> : ""}
+      {/* {ProductSelected ? <EditPage /> : ""} */}
       <Products />
     </main>
   );

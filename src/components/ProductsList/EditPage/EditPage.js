@@ -7,8 +7,9 @@ import {
 import s from "./EditPage.module.css";
 import { useState } from "react";
 import { getApi } from "../../services/api";
+import { Products } from "../Products/Products";
 
-export function EditPage() {
+export function EditPage({ setFiltredProduct, newFilter }) {
   const [width, setWidth] = useState("");
   const [height, setHeight] = useState("");
 
@@ -34,11 +35,13 @@ export function EditPage() {
       }
     ).then((result) => {
       result.json().then((resp) => {
+        dispatch(getIsRefresh(true));
         dispatch(getProductSelected(""));
+        setFiltredProduct(" ");
       });
     });
 
-    getApi();
+    newFilter = getApi();
     dispatch(getIsRefresh(true));
   };
 
@@ -191,3 +194,5 @@ export function EditPage() {
     </div>
   );
 }
+
+export default EditPage;

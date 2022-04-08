@@ -7,6 +7,7 @@ import {
   selectProductSelectedForInformation,
   selectIsRefresh,
   getIsRefresh,
+  selectProductSelected,
 } from "./Products-slice";
 import { SortLine } from "../SortLine/SortLine";
 import Modal from "react-bootstrap/Modal";
@@ -20,6 +21,7 @@ import Pagination from "../../Pagination/Pagination";
 import Items from "../../Items/Items";
 import FilterProduct from "../FilterProduct/FilterProduct";
 import SearchLine from "../SearchLine/SearchLine";
+import EditPage from "../EditPage/EditPage";
 
 export function Products() {
   const [showModal, setShowModal] = useState(false);
@@ -37,10 +39,14 @@ export function Products() {
   const isRefresh = useSelector(selectIsRefresh);
   const BASE_URL = "https://product-shop-api.herokuapp.com/product";
 
+  const ProductSelected = useSelector(selectProductSelected);
+
+  let newFilter;
+
   const dataSearch = (e) => {
     let valueInput = e.target.value;
 
-    const newFilter = products.filter((value) => {
+    newFilter = products.filter((value) => {
       return value.name.toLowerCase().includes(valueInput.toLowerCase());
     });
 
@@ -130,6 +136,11 @@ export function Products() {
   return (
     <div className="container">
       <ToastContainer />
+      {ProductSelected ? (
+        <EditPage setFiltredProduct={setFiltredProduct} newFilter={newFilter} />
+      ) : (
+        ""
+      )}
       <SearchLine dataSearch={dataSearch} />
       <SortLine />
 
