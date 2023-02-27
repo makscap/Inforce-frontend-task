@@ -7,7 +7,6 @@ import {
 import s from "./EditPage.module.css";
 import { useState } from "react";
 import { getApi } from "../../services/api";
-import { Products } from "../Products/Products";
 
 export function EditPage({ setFiltredProduct, newFilter }) {
   const [width, setWidth] = useState("");

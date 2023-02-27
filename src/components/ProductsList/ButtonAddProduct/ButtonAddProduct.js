@@ -9,7 +9,7 @@ import { getIsRefresh, selectProducts } from "../Products/Products-slice";
 import Modal from "react-bootstrap/Modal";
 import s from "./ButtonAddProduct.module.css";
 import React, { useState } from "react";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { getApi } from "../../services/api";
 import { GrAdd, GrChapterAdd } from "react-icons/gr";
