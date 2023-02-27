@@ -69,7 +69,7 @@ export function Products() {
       .catch((err) => {
         console.log(err);
       });
-  }, [isRefresh]);
+  }, [isRefresh, dispatch]);
 
   const handleClose = () => setShowModal(false);
   const handleShow = () => setShowModal(true);
